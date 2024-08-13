@@ -33,7 +33,7 @@ const Login = () => {
           />
           <label htmlFor="password">Password</label>
         </FloatLabel>
-        <Link to="/forgetpassword" className="w-full">
+        <Link to="/forget-password" className="w-full">
           <Button
             label="Forget Password?"
             link

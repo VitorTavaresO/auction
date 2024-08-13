@@ -35,7 +35,7 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="forgetpassword flex align-items-center justify-content-center bg-yellow-100">
+    <div className="forget-password flex align-items-center justify-content-center bg-yellow-100">
       <Card className="sm:w-30rem flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
