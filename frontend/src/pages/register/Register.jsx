@@ -3,6 +3,7 @@ import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
+import { InputMask } from "primereact/inputmask";
 import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
@@ -57,7 +58,7 @@ const Register = () => {
   const footer = (
     <>
       <Divider />
-      <p className="mt-2">Sugestões</p>
+      <p className="mt-2">Required</p>
       <ul className="pl-2 ml-2 mt-0 line-height-3">
         <li
           className={
@@ -192,8 +193,9 @@ const Register = () => {
           <label htmlFor="email">Email</label>
         </FloatLabel>
         <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <InputText
+          <InputMask
             value={phone}
+            mask="(99) 99999-9999"
             onChange={(e) => setPhone(e.target.value)}
             onFocus={() => handleFieldFocus("phone")}
             onBlur={() => handleFieldBlur("phone", phone)}
@@ -205,6 +207,7 @@ const Register = () => {
         </FloatLabel>
         <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
           <Password
+            inputStyle={{ width: "100%" }}
             toggleMask
             value={password}
             onChange={handlePasswordChange}
@@ -219,12 +222,15 @@ const Register = () => {
               isPasswordFocused &&
               !Object.values(passwordCriteria).every(Boolean)
             }
-            className={`w-full ${fieldErrors.password ? "p-invalid" : ""}`}
+            className={`w-full w-10rem' ${
+              fieldErrors.password ? "p-invalid" : ""
+            }`}
           />
           <label htmlFor="password">Password</label>
         </FloatLabel>
         <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
           <Password
+            inputStyle={{ width: "100%" }}
             toggleMask
             value={confirmPassword}
             onChange={handlePasswordConfirmation}
@@ -232,7 +238,7 @@ const Register = () => {
             onBlur={() => handleFieldBlur("confirmPassword", confirmPassword)}
             feedback={false}
             required
-            className={`w-full ${
+            className={`w-full w-10rem' ${
               fieldErrors.confirmPassword ? "p-invalid" : ""
             }`}
           />
