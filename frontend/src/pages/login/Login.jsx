@@ -9,7 +9,7 @@ import logo from './logo.png';
 
 const Login = () => {
     return (
-        <div className="login flex align-items-center justify-content-center">
+        <div className="login flex align-items-center justify-content-center bg-yellow-100">
             <Card className="md:w-25rem flex flex-column align-items-center justify-content-center text-center">
                 <Image src={logo} alt="Logo" width="250" className="logo mb-3" />
                 <h2>Login</h2>
