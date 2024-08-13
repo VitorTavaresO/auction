@@ -14,11 +14,11 @@ const Login = () => {
                 <Image src={logo} alt="Logo" width="250" className="logo mb-3" />
                 <h2>Login</h2>
                 <FloatLabel className="w-full mb-3 margin-label">
-                    <InputText placeholder="Email" className="w-full" />
+                    <InputText className="w-full" />
                     <label htmlFor="email">Email</label>
                 </FloatLabel>
                 <FloatLabel className="w-full mb-3 margin-label">
-                    <Password toggleMask placeholder="Password" className="w-full" />
+                    <Password toggleMask className="w-full" />
                     <label htmlFor="password">Password</label>
                 </FloatLabel>
                 <Button label="Forget Password?" link onClick={() => window.open('#', '_blank')} className="mb-3" />
