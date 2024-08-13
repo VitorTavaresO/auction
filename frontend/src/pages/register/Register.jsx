@@ -3,6 +3,7 @@ import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
+import { Link } from "react-router-dom";
 import { InputMask } from "primereact/inputmask";
 import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
@@ -245,10 +246,12 @@ const Register = () => {
           <label htmlFor="confirm-password">Confirm Password</label>
         </FloatLabel>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        <Button
-          label="Cancel"
-          className="mb-4 mt-5 w-full bg-red-500 border-red-500"
-        />
+        <Link to="/login" className="w-full">
+          <Button
+            label="Cancel"
+            className="mb-3 w-full bg-red-500 border-red-500"
+          />
+        </Link>
         <Button
           label="Submit"
           className={`mb-4 w-full ${
