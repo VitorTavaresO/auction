@@ -2,12 +2,18 @@ import "./ForgetPassword.css";
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 const ForgetPassword = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const [email, setEmail] = useState("");
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -36,7 +42,7 @@ const ForgetPassword = () => {
 
   return (
     <div className="forget-password flex align-items-center justify-content-center bg-yellow-100">
-      <Card className="sm:w-30rem flex flex-column align-items-center justify-content-center text-center">
+      <Card className="container-forget-password m-2 flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
           alt="Logo"
@@ -44,7 +50,7 @@ const ForgetPassword = () => {
           className="logo mb-3"
         />
         <h2>Recover Password</h2>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <InputText
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -56,12 +62,11 @@ const ForgetPassword = () => {
           />
           <label htmlFor="email">Email</label>
         </FloatLabel>
-        <Link to="/login" className="w-full">
-          <Button
-            label="Cancel"
-            className="mb-3 w-full bg-red-500 border-red-500"
-          />
-        </Link>
+        <Button
+          label="Cancel"
+          className="mb-3 w-full bg-red-500 border-red-500"
+          onClick={handleGoBack}
+        />
         <Button
           label="Submit"
           className={`mb-4 w-full ${

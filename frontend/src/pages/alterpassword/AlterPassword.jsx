@@ -3,12 +3,18 @@ import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 const AlterPassword = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordCriteria, setPasswordCriteria] = useState({
@@ -118,7 +124,7 @@ const AlterPassword = () => {
 
   return (
     <div className="alter-password flex align-items-center justify-content-center bg-yellow-100">
-      <Card className="sm:w-30rem flex flex-column align-items-center justify-content-center text-center">
+      <Card className="container-alter-password m-2 flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
           alt="Logo"
@@ -166,12 +172,11 @@ const AlterPassword = () => {
           <label htmlFor="confirm-password">Confirm Password</label>
         </FloatLabel>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        <Link to="/login" className="w-full">
-          <Button
-            label="Cancel"
-            className="mb-3 w-full bg-red-500 border-red-500"
-          />
-        </Link>
+        <Button
+          label="Cancel"
+          className="mb-3 w-full bg-red-500 border-red-500"
+          onClick={handleGoBack}
+        />
         <Button
           label="Submit"
           className={`mb-4 w-full ${
