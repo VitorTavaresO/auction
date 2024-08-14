@@ -139,128 +139,151 @@ const Register = () => {
   };
 
   return (
-    <div className="flex align-items-center justify-content-center bg-yellow-100">
-      <Card className="m-5 sm:w-30rem md:w-40rem lg:w-50rem xl:w-60rem flex flex-column align-items-center justify-content-center text-center">
-        <Image
-          src="./images/logo.png"
-          alt="Logo"
-          width="250"
-          className="logo mb-3"
-        />
-        <h2>Register</h2>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <InputText
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            onFocus={() => handleFieldFocus("firstName")}
-            onBlur={() => handleFieldBlur("firstName", firstName)}
-            required
-            className={`w-full ${fieldErrors.firstName ? "p-invalid" : ""}`}
-          />
-          <label htmlFor="first-name">First Name</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem ">
-          <InputText
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            onFocus={() => handleFieldFocus("lastName")}
-            onBlur={() => handleFieldBlur("lastName", lastName)}
-            required
-            className={`w-full ${fieldErrors.lastName ? "p-invalid" : ""}`}
-          />
-          <label htmlFor="last-name">Last Name</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <Calendar
-            value={birthday}
-            onChange={(e) => setBirthday(e.value)}
-            onFocus={() => handleFieldFocus("birthday")}
-            onBlur={() => handleFieldBlur("birthday", birthday)}
-            required
-            className={`w-full ${fieldErrors.birthday ? "p-invalid" : ""}`}
-          />
-          <label htmlFor="birthday">Birthday</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <InputText
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => handleFieldFocus("email")}
-            onBlur={() => handleFieldBlur("email", email)}
-            keyfilter="email"
-            required
-            className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
-          />
-          <label htmlFor="email">Email</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <InputMask
-            value={phone}
-            mask="(99) 99999-9999"
-            onChange={(e) => setPhone(e.target.value)}
-            onFocus={() => handleFieldFocus("phone")}
-            onBlur={() => handleFieldBlur("phone", phone)}
-            keyfilter="int"
-            required
-            className={`w-full ${fieldErrors.phone ? "p-invalid" : ""}`}
-          />
-          <label htmlFor="phone">Phone</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <Password
-            inputStyle={{ width: "100%" }}
-            toggleMask
-            value={password}
-            onChange={handlePasswordChange}
-            onFocus={() => {
-              handleFieldFocus("password");
-              setIsPasswordFocused(true);
-            }}
-            onBlur={() => handleFieldBlur("password", password)}
-            header={header}
-            footer={footer}
-            invalid={
-              isPasswordFocused &&
-              !Object.values(passwordCriteria).every(Boolean)
-            }
-            className={`w-full w-10rem' ${
-              fieldErrors.password ? "p-invalid" : ""
-            }`}
-          />
-          <label htmlFor="password">Password</label>
-        </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
-          <Password
-            inputStyle={{ width: "100%" }}
-            toggleMask
-            value={confirmPassword}
-            onChange={handlePasswordConfirmation}
-            onFocus={() => handleFieldFocus("confirmPassword")}
-            onBlur={() => handleFieldBlur("confirmPassword", confirmPassword)}
-            feedback={false}
-            required
-            className={`w-full w-10rem' ${
-              fieldErrors.confirmPassword ? "p-invalid" : ""
-            }`}
-          />
-          <label htmlFor="confirm-password">Confirm Password</label>
-        </FloatLabel>
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        <Link to="/login" className="w-full">
-          <Button
-            label="Cancel"
-            className="mb-3 w-full bg-red-500 border-red-500"
-          />
-        </Link>
-        <Button
-          label="Submit"
-          className={`mb-4 w-full ${
-            isFormValid
-              ? "bg-green-500 border-green-500"
-              : "bg-gray-500 border-gray-500"
-          }`}
-          disabled={!isFormValid}
-        />
+    <div className="register flex align-items-center justify-content-center bg-yellow-100">
+      <Card className="m-2 container-register grid align-items-center justify-content-center text-center">
+        <div className="grid">
+          <div className="col-12">
+            <Image
+              src="./images/logo.png"
+              alt="Logo"
+              width="250"
+              className="logo mb-3"
+            />
+          </div>
+          <div className="sm:col-6 col-12">
+            <FloatLabel className="w-full mb-5">
+              <InputText
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                onFocus={() => handleFieldFocus("firstName")}
+                onBlur={() => handleFieldBlur("firstName", firstName)}
+                required
+                className={`w-full ${fieldErrors.firstName ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="first-name">First Name</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-6 col-12">
+            <FloatLabel className="w-full mb-5">
+              <InputText
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                onFocus={() => handleFieldFocus("lastName")}
+                onBlur={() => handleFieldBlur("lastName", lastName)}
+                required
+                className={`w-full ${fieldErrors.lastName ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="last-name">Last Name</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-3 col-12">
+            <FloatLabel className="w-full mb-5">
+              <Calendar
+                value={birthday}
+                onChange={(e) => setBirthday(e.value)}
+                onFocus={() => handleFieldFocus("birthday")}
+                onBlur={() => handleFieldBlur("birthday", birthday)}
+                required
+                className={`w-full ${fieldErrors.birthday ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="birthday">Birthday</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-3 col-12">
+            <FloatLabel className="w-full mb-5">
+              <InputMask
+                value={phone}
+                mask="(99) 99999-9999"
+                onChange={(e) => setPhone(e.target.value)}
+                onFocus={() => handleFieldFocus("phone")}
+                onBlur={() => handleFieldBlur("phone", phone)}
+                keyfilter="int"
+                required
+                className={`w-full ${fieldErrors.phone ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="phone">Phone</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-6 col-12">
+            <FloatLabel className="w-full mb-5">
+              <InputText
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => handleFieldFocus("email")}
+                onBlur={() => handleFieldBlur("email", email)}
+                keyfilter="email"
+                required
+                className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="email">Email</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-6 col-12">
+            <FloatLabel className="w-full mb-5">
+              <Password
+                inputStyle={{ width: "100%" }}
+                toggleMask
+                value={password}
+                onChange={handlePasswordChange}
+                onFocus={() => {
+                  handleFieldFocus("password");
+                  setIsPasswordFocused(true);
+                }}
+                onBlur={() => handleFieldBlur("password", password)}
+                header={header}
+                footer={footer}
+                invalid={
+                  isPasswordFocused &&
+                  !Object.values(passwordCriteria).every(Boolean)
+                }
+                className={`w-full ${fieldErrors.password ? "p-invalid" : ""}`}
+              />
+              <label htmlFor="password">Password</label>
+            </FloatLabel>
+          </div>
+          <div className="sm:col-6 col-12">
+            <FloatLabel className="w-full mb-5">
+              <Password
+                inputStyle={{ width: "100%" }}
+                toggleMask
+                value={confirmPassword}
+                onChange={handlePasswordConfirmation}
+                onFocus={() => handleFieldFocus("confirmPassword")}
+                onBlur={() =>
+                  handleFieldBlur("confirmPassword", confirmPassword)
+                }
+                feedback={false}
+                required
+                className={`w-full ${
+                  fieldErrors.confirmPassword ? "p-invalid" : ""
+                }`}
+              />
+              <label htmlFor="confirm-password">Confirm Password</label>
+            </FloatLabel>
+          </div>
+          <div className="col-12">
+            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+          </div>
+          <div className="col-6">
+            <Link to="/login" className="w-full">
+              <Button
+                label="Cancel"
+                className="mb-3 w-full bg-red-500 border-red-500"
+              />
+            </Link>
+          </div>
+          <div className="col-6">
+            <Button
+              label="Submit"
+              className={`mb-4 w-full ${
+                isFormValid
+                  ? "bg-green-500 border-green-500"
+                  : "bg-gray-500 border-gray-500"
+              }`}
+              disabled={!isFormValid}
+            />
+          </div>
+        </div>
       </Card>
     </div>
   );

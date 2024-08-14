@@ -1,4 +1,3 @@
-import "./Login.css";
 import React from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
@@ -8,11 +7,12 @@ import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
+import "./Login.css";
 
 const Login = () => {
   return (
     <div className="login flex align-items-center justify-content-center bg-yellow-100">
-      <Card className="m-5 sm:w-30rem md:w-40rem lg:w-50rem xl:w-60rem flex flex-column align-items-center justify-content-center text-center">
+      <Card className="m-2 container-login flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
           alt="Logo"
@@ -20,11 +20,11 @@ const Login = () => {
           className="logo mb-3"
         />
         <h2>Login</h2>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <InputText className="w-full" />
           <label htmlFor="email">Email</label>
         </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <Password
             inputStyle={{ width: "100%" }}
             feedback={false}

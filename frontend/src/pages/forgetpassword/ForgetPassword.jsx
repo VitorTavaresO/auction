@@ -36,7 +36,7 @@ const ForgetPassword = () => {
 
   return (
     <div className="forget-password flex align-items-center justify-content-center bg-yellow-100">
-      <Card className="sm:w-30rem flex flex-column align-items-center justify-content-center text-center">
+      <Card className="container-forget-password m-2 flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
           alt="Logo"
@@ -44,7 +44,7 @@ const ForgetPassword = () => {
           className="logo mb-3"
         />
         <h2>Recover Password</h2>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <InputText
             value={email}
             onChange={(e) => setEmail(e.target.value)}
