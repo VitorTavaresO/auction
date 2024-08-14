@@ -3,7 +3,7 @@ import { Card } from "primereact/card";
 import { Image } from "primereact/image";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { InputMask } from "primereact/inputmask";
 import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
@@ -12,6 +12,12 @@ import { Button } from "primereact/button";
 import "./Register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -264,15 +270,14 @@ const Register = () => {
           <div className="col-12">
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           </div>
-          <div className="col-6">
-            <Link to="/login" className="w-full">
-              <Button
-                label="Cancel"
-                className="mb-3 w-full bg-red-500 border-red-500"
-              />
-            </Link>
+          <div className="sm:col-6 col-12">
+            <Button
+              label="Cancel"
+              className="mb-3 w-full bg-red-500 border-red-500"
+              onClick={handleGoBack}
+            />
           </div>
-          <div className="col-6">
+          <div className="sm:col-6 col-12">
             <Button
               label="Submit"
               className={`mb-4 w-full ${

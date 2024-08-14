@@ -2,12 +2,18 @@ import "./ForgetPassword.css";
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 const ForgetPassword = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   const [email, setEmail] = useState("");
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -56,12 +62,11 @@ const ForgetPassword = () => {
           />
           <label htmlFor="email">Email</label>
         </FloatLabel>
-        <Link to="/login" className="w-full">
-          <Button
-            label="Cancel"
-            className="mb-3 w-full bg-red-500 border-red-500"
-          />
-        </Link>
+        <Button
+          label="Cancel"
+          className="mb-3 w-full bg-red-500 border-red-500"
+          onClick={handleGoBack}
+        />
         <Button
           label="Submit"
           className={`mb-4 w-full ${

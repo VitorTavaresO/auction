@@ -14,4 +14,8 @@
   .container-register {
     width: 100%;
   }
+
+  .register {
+    height: 100%;
+  }
 }
