@@ -123,7 +123,7 @@ const AlterPassword = () => {
   };
 
   return (
-    <div className="alter-password flex align-items-center justify-content-center bg-yellow-100">
+    <div className="alter-password flex align-items-center justify-content-center bg-red-300">
       <Card className="container-alter-password m-2 flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"

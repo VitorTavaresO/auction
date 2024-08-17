@@ -145,7 +145,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register flex align-items-center justify-content-center bg-yellow-100">
+    <div className="register flex align-items-center justify-content-center bg-red-300">
       <Card className="m-2 container-register grid align-items-center justify-content-center text-center">
         <div className="grid">
           <div className="col-12">
