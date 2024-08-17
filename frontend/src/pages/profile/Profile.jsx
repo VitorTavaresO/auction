@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   return (
     <div className="min-h-screen flex justify-content-center bg-gray-400">
-      <div className="grid w-8">
-        <Card className="col-fixed w-25rem h-30rem mt-5 mb-5 m-2 flex align-items-center justify-content-center text-center">
+      <div className="grid sm:w-full lg:w-8">
+        <Card className="sm:col-fixed sm:w-25rem col-fixed w-full h-30rem mt-5 mb-5 m-2 flex align-items-center justify-content-center text-center">
           <Avatar
             image="/images/teste.jpg"
             shape="circle"
@@ -51,8 +51,6 @@ const Profile = () => {
               </span>
             </Link>
           </div>
-          <Card className="col h-25rem mt-5 mb-5 m-2 flex align-items-top justify-content-center text-center"></Card>
-          <Card className="col h-25rem mt-5 mb-5 m-2 flex align-items-top justify-content-center text-center"></Card>
           <Card className="col h-25rem mt-5 mb-5 m-2 flex align-items-top justify-content-center text-center"></Card>
         </Card>
       </div>
