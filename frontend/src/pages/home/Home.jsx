@@ -4,7 +4,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <>
-      <div className=""></div>
+      <div className="h-screen"></div>
     </>
   );
 };
