@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Header.css";
 import { Menubar } from "primereact/menubar";
 
@@ -9,7 +8,7 @@ const Header = () => {
       label: "Leilões",
       icon: "pi pi-fw pi-hammer",
       command: () => {
-        window.location = "/about";
+        window.location = "/auctions";
       },
     },
     {
@@ -33,7 +32,7 @@ const Header = () => {
       label: "Perfil",
       icon: "pi pi-fw pi-user",
       command: () => {
-        window.location = "/contact";
+        window.location = "/profile";
       },
     },
   ];
