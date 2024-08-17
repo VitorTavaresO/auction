@@ -9,3 +9,51 @@
 .menubar-custom .p-menuitem-text {
   color: #ffd700 !important;
 }
+
+.menubar-custom .p-menubar-root-list {
+  background-color: #1f2937 !important;
+}
+
+.menubar-custom .p-menubar-mobile-active .p-menubar-root-list {
+  background-color: #1f2937 !important;
+}
+
+.menubar-custom .p-menubar-mobile-active .p-menubar-root-list .p-menuitem-link {
+  background-color: #333333 !important;
+}
+
+.menubar-custom .p-menuitem[data-p-focused="true"] .p-menuitem-link {
+  background-color: #333333 !important;
+  border-color: #333333;
+  border-radius: 0.25rem;
+}
+
+.menubar-custom .p-menuitem-link:hover {
+  background-color: #333333 !important;
+  border-color: #333333;
+  border-radius: 0.25rem;
+}
+
+.menubar-custom .p-menuitem-content:hover {
+  background-color: #333333 !important;
+  border-color: #333333;
+  border-radius: 0.25rem;
+}
+
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: inline-block !important;
+  }
+}

@@ -13,21 +13,25 @@ const Header = () => {
       },
     },
     {
-      label: "Home",
-      template: () => (
-        <img
-          src={"./images/logo.png"}
-          alt="Home Icon"
-          style={{ width: "150px", height: "100px" }}
-        />
+      label: (
+        <div className="menu-item-label">
+          <i className="pi pi-fw pi-home mobile-only"></i>
+          <img
+            src={"./images/logo.png"}
+            alt="Home Icon"
+            className="menubar-logo desktop-only"
+            style={{ width: "150px", height: "100px" }}
+          />
+          <span className="mobile-only ml-2"> Home</span>
+        </div>
       ),
       command: () => {
         window.location = "/";
       },
     },
     {
-      label: "Contact",
-      icon: "pi pi-fw pi-envelope",
+      label: "Perfil",
+      icon: "pi pi-fw pi-user",
       command: () => {
         window.location = "/contact";
       },
