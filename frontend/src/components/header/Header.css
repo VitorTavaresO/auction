@@ -1,10 +1,11 @@
-.header{
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
+.menubar-custom .p-menuitem-link {
+  color: #ffd700 !important;
+}
+
+.menubar-custom .p-menuitem-link .pi {
+  color: #ffd700 !important;
+}
+
+.menubar-custom .p-menuitem-text {
+  color: #ffd700 !important;
 }
