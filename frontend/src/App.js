@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
+import Profile from "./pages/profile/Profile";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
 
@@ -56,6 +57,15 @@ function App() {
                 {" "}
                 <AlterPassword />{" "}
               </SimpleLayout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <DefaultLayout>
+                {" "}
+                <Profile />{" "}
+              </DefaultLayout>
             }
           />
         </Routes>
