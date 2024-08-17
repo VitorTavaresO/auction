@@ -4,12 +4,15 @@ import { Card } from "primereact/card";
 import { Avatar } from "primereact/avatar";
 import { InputText } from "primereact/inputtext";
 import { Link } from "react-router-dom";
+import { Image } from "primereact/image";
+
+const image = <Image src="/images/novilha.jpg" preview />;
 
 const Profile = () => {
   return (
     <div className="min-h-screen flex justify-content-center bg-gray-400">
-      <div className="grid sm:w-full lg:w-8">
-        <Card className="sm:col-fixed sm:w-25rem col-fixed w-full h-30rem mt-5 mb-5 m-2 flex align-items-center justify-content-center text-center">
+      <div className="grid sm:w-full lg:w-10">
+        <Card className="col lg:col-4 h-30rem mt-5 mb-5 m-2 flex align-items-center justify-content-center text-center">
           <Avatar
             image="/images/teste.jpg"
             shape="circle"
@@ -51,7 +54,32 @@ const Profile = () => {
               </span>
             </Link>
           </div>
-          <Card className="col h-25rem mt-5 mb-5 m-2 flex align-items-top justify-content-center text-center"></Card>
+          <div className="grid m-5 flex flex-column align-items-center justify-content-center text-center">
+            <Card
+              title="Mimosa"
+              subTitle="R$ 5.500,00"
+              header={image}
+              className="col-12 md:col-6 lg:col-6 lg:w-25rem flex flex-column align-items-center justify-content-center text-center m-2"
+            >
+              <p className="m-0">Paranavaí - PR</p>
+            </Card>
+            <Card
+              title="Betina"
+              subTitle="R$ 5.500,00"
+              header={image}
+              className="col-12 md:col-6 lg:col-6 lg:w-25rem flex flex-column align-items-center justify-content-center text-center m-2"
+            >
+              <p className="m-0">Paranavaí - PR</p>
+            </Card>
+            <Card
+              title="Gracinha"
+              subTitle="R$ 5.500,00"
+              header={image}
+              className="col-12 md:col-6 lg:col-6 lg:w-25rem flex flex-column align-items-center justify-content-center text-center m-2"
+            >
+              <p className="m-0">Paranavaí - PR</p>
+            </Card>
+          </div>
         </Card>
       </div>
     </div>
