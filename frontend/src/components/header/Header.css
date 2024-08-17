@@ -48,7 +48,7 @@
   display: none !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .desktop-only {
     display: none;
   }
