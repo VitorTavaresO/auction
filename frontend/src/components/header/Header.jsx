@@ -8,7 +8,7 @@ const Header = () => {
       label: "Leilões",
       icon: "pi pi-fw pi-hammer",
       command: () => {
-        window.location = "/auctions";
+        window.location = "/auction-list";
       },
     },
     {
