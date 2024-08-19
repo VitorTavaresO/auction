@@ -107,17 +107,18 @@ const Profile = () => {
               />
             </div>
           </div>
-          <div className="grid m-5 flex flex-column align-items-center justify-content-center text-center">
+          <div className="grid m-5">
             {filteredCows.map((cow, index) => (
-              <Card
-                key={index}
-                title={cow.name}
-                subTitle={cow.price}
-                header={image}
-                className="col-12 md:col-6 lg:col-6 lg:w-25rem flex flex-column align-items-center justify-content-center text-center m-2"
-              >
-                <p className="m-0">{cow.location}</p>
-              </Card>
+              <div key={index} className="col-12 lg:col-6">
+                <Card
+                  title={cow.name}
+                  subTitle={cow.price}
+                  header={image}
+                  className="flex flex-column align-items-center justify-content-center text-center m-2"
+                >
+                  <p className="m-0">{cow.location}</p>
+                </Card>
+              </div>
             ))}
           </div>
         </Card>
