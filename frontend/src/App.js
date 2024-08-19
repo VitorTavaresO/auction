@@ -9,21 +9,13 @@ import Profile from "./pages/profile/Profile";
 import AuctionList from "./pages/auctionlist/AuctionList";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
+import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <DefaultLayout>
-                {" "}
-                <Home />{" "}
-              </DefaultLayout>
-            }
-          />
           <Route
             path="/login"
             element={
@@ -60,24 +52,35 @@ function App() {
               </SimpleLayout>
             }
           />
-          <Route
-            path="/profile"
-            element={
-              <DefaultLayout>
-                {" "}
-                <Profile />{" "}
-              </DefaultLayout>
-            }
-          />
-          <Route
-            path="/auction-list"
-            element={
-              <DefaultLayout>
-                {" "}
-                <AuctionList />{" "}
-              </DefaultLayout>
-            }
-          />
+          <Route element={<PrivateRouter />}>
+            <Route
+              path="/"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <Home />{" "}
+                </DefaultLayout>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <Profile />{" "}
+                </DefaultLayout>
+              }
+            />
+            <Route
+              path="/auction-list"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <AuctionList />{" "}
+                </DefaultLayout>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
