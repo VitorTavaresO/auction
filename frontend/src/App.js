@@ -5,23 +5,17 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
+import Profile from "./pages/profile/Profile";
+import AuctionList from "./pages/auctionlist/AuctionList";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
+import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <DefaultLayout>
-                {" "}
-                <Home />{" "}
-              </DefaultLayout>
-            }
-          />
           <Route
             path="/login"
             element={
@@ -58,6 +52,35 @@ function App() {
               </SimpleLayout>
             }
           />
+          <Route element={<PrivateRouter />}>
+            <Route
+              path="/"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <Home />{" "}
+                </DefaultLayout>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <Profile />{" "}
+                </DefaultLayout>
+              }
+            />
+            <Route
+              path="/auction-list"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <AuctionList />{" "}
+                </DefaultLayout>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
