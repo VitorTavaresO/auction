@@ -11,7 +11,7 @@ import "./Login.css";
 
 const Login = () => {
   return (
-    <div className="login flex align-items-center justify-content-center bg-red-300">
+    <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
       <Card className="m-2 container-login flex flex-column align-items-center justify-content-center text-center">
         <Image
           src="./images/logo.png"
