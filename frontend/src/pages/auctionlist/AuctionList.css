@@ -1,0 +1,27 @@
+.stars {
+  color: #ffd700 !important;
+}
+
+.no-style-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.p-inputgroup-addon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.filter-container.show {
+  max-height: 200px;
+}
