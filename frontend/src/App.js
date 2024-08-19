@@ -7,6 +7,7 @@ import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
 import Profile from "./pages/profile/Profile";
 import AuctionList from "./pages/auctionlist/AuctionList";
+import AuctionBids from "./pages/auctionbids/AuctionBids";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
 
@@ -75,6 +76,15 @@ function App() {
               <DefaultLayout>
                 {" "}
                 <AuctionList />{" "}
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="/auction/screen"
+            element={
+              <DefaultLayout>
+                {" "}
+                <AuctionBids />{" "}
               </DefaultLayout>
             }
           />
