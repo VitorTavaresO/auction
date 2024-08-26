@@ -5,10 +5,10 @@ import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
 import { useNavigate } from "react-router-dom";
 import { InputMask } from "primereact/inputmask";
-import { Calendar } from "primereact/calendar";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import CpfValidation from "../../validation/cpfValidation";
 import "./Register.css";
 
 const Register = () => {
@@ -20,7 +20,8 @@ const Register = () => {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [cpf, setCPF] = useState("");
+  const [cpfIsValid, setCpfIsValid] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +43,7 @@ const Register = () => {
     const isFormFilled =
       firstName &&
       lastName &&
-      birthday &&
+      cpf &&
       email &&
       phone &&
       password &&
@@ -53,7 +54,7 @@ const Register = () => {
   }, [
     firstName,
     lastName,
-    birthday,
+    cpf,
     email,
     phone,
     password,
@@ -184,15 +185,20 @@ const Register = () => {
           </div>
           <div className="sm:col-3 col-12">
             <FloatLabel className="w-full mb-5">
-              <Calendar
-                value={birthday}
-                onChange={(e) => setBirthday(e.value)}
-                onFocus={() => handleFieldFocus("birthday")}
-                onBlur={() => handleFieldBlur("birthday", birthday)}
+              <InputMask
+                value={cpf}
+                mask="999.999.999-99"
+                onChange={(e) => {
+                  setCpfIsValid(CpfValidation(cpf));
+                  setCPF(e.value);
+                }}
+                onFocus={() => handleFieldFocus("cpf")}
+                onBlur={() => handleFieldBlur("cpf", cpf)}
                 required
-                className={`w-full ${fieldErrors.birthday ? "p-invalid" : ""}`}
+                invalid={!cpfIsValid}
+                className={`w-full ${fieldErrors.cpf ? "p-invalid" : ""}`}
               />
-              <label htmlFor="birthday">Birthday</label>
+              <label htmlFor="cpf">CPF</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
