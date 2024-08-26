@@ -7,6 +7,7 @@ import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
 import Profile from "./pages/profile/Profile";
 import AuctionList from "./pages/auctionlist/AuctionList";
+import EditUserData from "./pages/edituserdata/EditUserData";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
 import PrivateRouter from "./components/PrivateRouter";
@@ -68,6 +69,15 @@ function App() {
                 <DefaultLayout>
                   {" "}
                   <Profile />{" "}
+                </DefaultLayout>
+              }
+            />
+            <Route
+              path="/edit-user-data"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <EditUserData />{" "}
                 </DefaultLayout>
               }
             />

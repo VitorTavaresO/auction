@@ -165,7 +165,7 @@ const Profile = () => {
             <>
               <Button
                 label="Editar Dados"
-                className="w-full h-2rem bg-blue-600 border-blue-600 mt-2"
+                className="w-full h-2rem bg-yellow-600 border-yellow-600 mt-2"
                 onClick={handleEditUserDataClick}
               />
               <Button
