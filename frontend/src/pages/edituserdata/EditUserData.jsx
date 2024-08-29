@@ -127,6 +127,34 @@ const EditUserData = () => {
     navigate("/profile");
   };
 
+  const fetchAddress = async (cep) => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
+
+      if (data.erro) {
+        alert("CEP não encontrado.");
+        return;
+      }
+
+      setStreet(data.logradouro || "");
+      setNeighborhood(data.bairro || "");
+      setCity(data.localidade || "");
+      setState(data.uf || "");
+    } catch (error) {
+      console.error("Erro ao buscar endereço:", error);
+    }
+  };
+
+  const handleCepChange = (e) => {
+    const newCep = e.target.value;
+    setCep(newCep);
+
+    if (newCep.length === 9) {
+      fetchAddress(newCep);
+    }
+  };
+
   return (
     <div className="h-screen flex align-items-center justify-content-center">
       <Card className="m-2 container-EditUserData grid align-items-center justify-content-center text-center">
@@ -235,7 +263,7 @@ const EditUserData = () => {
             <FloatLabel className="w-full mb-5">
               {cepInputType === "text" ? (
                 <InputText
-                  onChange={(e) => setCep(e.target.value)}
+                  onChange={handleCepChange}
                   onFocus={handleCepFocus}
                   onBlur={() => handleFieldBlur("cep", cep)}
                   className={`w-full ${fieldErrors.cep ? "p-invalid" : ""}`}
@@ -244,7 +272,7 @@ const EditUserData = () => {
               ) : (
                 <InputMask
                   mask="99999-999"
-                  onChange={(e) => setCep(e.value)}
+                  onChange={handleCepChange}
                   onFocus={() => handleFieldFocus("cep")}
                   onBlur={() => handleFieldBlur("cep", cep)}
                   className={`w-full ${fieldErrors.cep ? "p-invalid" : ""}`}
