@@ -39,6 +39,8 @@ const EditUserData = () => {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
         try {
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
@@ -49,12 +51,7 @@ const EditUserData = () => {
             setNeighborhood(
               data.address.neighbourhood || data.address.suburb || ""
             );
-            setCity(
-              data.address.city ||
-                data.address.town ||
-                data.address.village ||
-                ""
-            );
+            setCity(data.address.town || "");
             setState(data.address.state || "");
             setCep(data.address.postcode || "");
           }
@@ -187,7 +184,7 @@ const EditUserData = () => {
   };
 
   return (
-    <div className="h-screen flex align-items-center justify-content-center">
+    <div className="flex align-items-center justify-content-center">
       <Card className="m-2 container-EditUserData grid align-items-center justify-content-center text-center">
         <div className="grid">
           <div className="col-12"></div>
