@@ -26,6 +26,7 @@ const Profile = () => {
 
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    const storedUserAddress = JSON.parse(localStorage.getItem("userAddress"));
     const storedUserAvatar = JSON.parse(localStorage.getItem("userAvatar"));
     if (storedUserData) {
       setProfile((prevProfile) => ({
@@ -34,6 +35,7 @@ const Profile = () => {
         role: storedUserData.role || "Vendendor",
         phone: storedUserData.phone,
         email: storedUserData.email,
+        location: storedUserAddress.city + " - " + storedUserAddress.state,
         image: storedUserAvatar || "/images/avatar.png",
       }));
     }
