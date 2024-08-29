@@ -35,7 +35,7 @@ const Profile = () => {
         role: storedUserData.role || "Vendendor",
         phone: storedUserData.phone,
         email: storedUserData.email,
-        location: storedUserAddress.city + " - " + storedUserAddress.state,
+        location: storedUserAddress.city || "-",
         image: storedUserAvatar || "/images/avatar.png",
       }));
     }

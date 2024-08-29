@@ -36,6 +36,37 @@ const EditUserData = () => {
   const [fieldErrors, setFieldErrors] = useState({});
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+          );
+          const data = await response.json();
+          if (data.address) {
+            setStreet(data.address.road || "");
+            setNeighborhood(
+              data.address.neighbourhood || data.address.suburb || ""
+            );
+            setCity(
+              data.address.city ||
+                data.address.town ||
+                data.address.village ||
+                ""
+            );
+            setState(data.address.state || "");
+            setCep(data.address.postcode || "");
+          }
+        } catch (error) {
+          console.error("Erro ao buscar endereço:", error);
+        }
+      },
+      (error) => {
+        console.error("Erro ao obter localização:", error);
+      }
+    );
+
     const storedUserData = JSON.parse(localStorage.getItem("userData"));
     const storedUserAddress = JSON.parse(localStorage.getItem("userAddress"));
     const storedUserAvatar = localStorage.getItem("userAvatar");
