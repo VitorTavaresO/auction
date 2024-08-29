@@ -145,6 +145,19 @@ const Register = () => {
     }
   };
 
+  const handleSubmit = () => {
+    const userData = {
+      firstName,
+      lastName,
+      cpf,
+      email,
+      phone,
+      password,
+    };
+    localStorage.setItem("userData", JSON.stringify(userData));
+    navigate("/profile"); // Redireciona para a página de perfil após o registro
+  };
+
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
       <Card className="m-2 container-register grid align-items-center justify-content-center text-center">
@@ -292,6 +305,7 @@ const Register = () => {
                   : "bg-gray-500 border-gray-500"
               }`}
               disabled={!isFormValid}
+              onClick={handleSubmit}
             />
           </div>
         </div>
