@@ -35,7 +35,16 @@ const Header = () => {
         window.location = "/profile";
       },
     },
+    {
+      label: "Logout",
+      icon: "pi pi-fw pi-sign-out",
+      command: () => {
+        localStorage.removeItem("token");
+        window.location = "/login";
+      },
+    },
   ];
+
   return (
     <>
       <Menubar
