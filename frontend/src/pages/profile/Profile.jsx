@@ -19,13 +19,14 @@ const Profile = () => {
     phone: "",
     email: "",
     location: "-",
-    image: "/images/avatar.png",
+    image: "",
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    const storedUserAvatar = JSON.parse(localStorage.getItem("userAvatar"));
     if (storedUserData) {
       setProfile((prevProfile) => ({
         ...prevProfile,
@@ -33,6 +34,7 @@ const Profile = () => {
         role: storedUserData.role || "Vendendor",
         phone: storedUserData.phone,
         email: storedUserData.email,
+        image: storedUserAvatar || "/images/avatar.png",
       }));
     }
   }, []);

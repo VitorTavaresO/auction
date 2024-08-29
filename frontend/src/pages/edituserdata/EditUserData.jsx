@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { InputMask } from "primereact/inputmask";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
+import { FileUpload } from "primereact/fileupload";
 import CpfValidation from "../../validation/cpfValidation";
 import "./EditUserData.css";
 
@@ -30,12 +31,14 @@ const EditUserData = () => {
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
 
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem("userData"));
     const storedUserAddress = JSON.parse(localStorage.getItem("userAddress"));
+    const storedUserAvatar = localStorage.getItem("userAvatar");
     if (storedUserData) {
       setFirstName(storedUserData.firstName);
       setLastName(storedUserData.lastName);
@@ -52,6 +55,9 @@ const EditUserData = () => {
       setNeighborhood(storedUserAddress.neighborhood || "");
       setCity(storedUserAddress.city || "");
       setState(storedUserAddress.state || "");
+    }
+    if (storedUserAvatar) {
+      setUserAvatar(storedUserAvatar);
     }
   }, []);
 
@@ -89,6 +95,15 @@ const EditUserData = () => {
   const handlePhoneFocus = () => {
     setPhoneInputType("mask");
     setPhone("");
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const filePath = `/public/images/${file.name}`;
+      setUserAvatar(filePath);
+      localStorage.setItem("userAvatar", filePath);
+    }
   };
 
   const handleSubmit = () => {
@@ -300,6 +315,16 @@ const EditUserData = () => {
               />
               <label htmlFor="state">Estado</label>
             </FloatLabel>
+          </div>
+          <div className="sm:col-12 col-12">
+            <FileUpload
+              mode="basic"
+              accept="image/*"
+              maxFileSize={1000000}
+              customUpload
+              uploadHandler={handleImageChange}
+              className="w-full"
+            />
           </div>
           <div className="sm:col-6 col-12">
             <Button
