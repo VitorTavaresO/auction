@@ -63,6 +63,8 @@ function App() {
                 </DefaultLayout>
               }
             />
+          </Route>
+          <Route element={<PrivateRouter />}>
             <Route
               path="/profile"
               element={
@@ -72,21 +74,25 @@ function App() {
                 </DefaultLayout>
               }
             />
-            <Route
-              path="/edit-user-data"
-              element={
-                <DefaultLayout>
-                  {" "}
-                  <EditUserData />{" "}
-                </DefaultLayout>
-              }
-            />
+          </Route>
+          <Route element={<PrivateRouter />}>
             <Route
               path="/auction-list"
               element={
                 <DefaultLayout>
                   {" "}
                   <AuctionList />{" "}
+                </DefaultLayout>
+              }
+            />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route
+              path="/edit-user-data"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <EditUserData />{" "}
                 </DefaultLayout>
               }
             />
