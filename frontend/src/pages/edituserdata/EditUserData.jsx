@@ -125,13 +125,9 @@ const EditUserData = () => {
     setPhone("");
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const filePath = `/public/images/${file.name}`;
-      setUserAvatar(filePath);
-      localStorage.setItem("userAvatar", filePath);
-    }
+  const handleImagePath = (e) => {
+    const path = JSON.stringify("/images/" + e.files[0].name);
+    localStorage.setItem("userAvatar", path);
   };
 
   const handleSubmit = () => {
@@ -152,6 +148,7 @@ const EditUserData = () => {
     };
     localStorage.setItem("userData", JSON.stringify(userData));
     localStorage.setItem("userAddress", JSON.stringify(userAddress));
+
     navigate("/profile");
   };
 
@@ -373,12 +370,13 @@ const EditUserData = () => {
             </FloatLabel>
           </div>
           <div className="sm:col-12 col-12">
+            <h4 className="mb-3">Avatar</h4>
             <FileUpload
               mode="basic"
               accept="image/*"
               maxFileSize={1000000}
               customUpload
-              uploadHandler={handleImageChange}
+              onSelect={handleImagePath}
               className="w-full"
             />
           </div>

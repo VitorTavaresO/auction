@@ -35,8 +35,13 @@ const Profile = () => {
         role: storedUserData.role || "Vendendor",
         phone: storedUserData.phone,
         email: storedUserData.email,
-        location: storedUserAddress.city || "-",
         image: storedUserAvatar || "/images/avatar.png",
+      }));
+    }
+    if (storedUserAddress) {
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        location: storedUserAddress.city + " - " + storedUserAddress.state,
       }));
     }
   }, []);
