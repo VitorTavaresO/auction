@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
 import CpfValidation from "../../validation/cpfValidation";
-import "./EditUserData.css";
+import style from "./EditUserData.module.css";
 
 const EditUserData = () => {
   const navigate = useNavigate();
@@ -182,7 +182,9 @@ const EditUserData = () => {
 
   return (
     <div className="flex align-items-center justify-content-center">
-      <Card className="m-2 container-EditUserData grid align-items-center justify-content-center text-center">
+      <Card
+        className={`m-2 ${style["container-edit-user-data"]} grid align-items-center justify-content-center text-center`}
+      >
         <div className="grid">
           <div className="col-12"></div>
           <div className="sm:col-6 col-12">

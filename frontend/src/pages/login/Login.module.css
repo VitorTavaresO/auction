@@ -1,0 +1,9 @@
+.container-login {
+  width: 40%;
+}
+
+@media screen and (max-width: 600px) {
+  .container-login {
+    width: 100%;
+  }
+}

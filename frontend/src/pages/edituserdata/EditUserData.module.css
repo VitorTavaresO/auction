@@ -1,13 +1,9 @@
-.p-icon-field {
-  width: 100%;
-}
-
-.p-card-body {
+.container-edit-user-data {
   width: 75%;
 }
 
 @media screen and (max-width: 600px) {
-  .p-card-body {
+  .container-edit-user-data {
     width: 100%;
   }
 }

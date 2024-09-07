@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Profile.css";
+import style from "./Profile.module.css";
 import { Card } from "primereact/card";
 import { Avatar } from "primereact/avatar";
 import { InputText } from "primereact/inputtext";
@@ -86,7 +86,7 @@ const Profile = () => {
             className="w-full h-2rem bg-gray-600 border-gray-600"
             onClick={handleEditUserDataClick}
           />
-          <h3 className="stars">
+          <h3 className={`${style["stars"]}`}>
             <i className="pi pi-star-fill m-1"></i>
             <i className="pi pi-star-fill m-1"></i>
             <i className="pi pi-star-fill m-1"></i>
@@ -128,7 +128,11 @@ const Profile = () => {
               </span>
             </Link>
           </div>
-          <div className={`filter-container ${showFilters ? "show" : ""}`}>
+          <div
+            className={`${style["filter-container"]} ${
+              showFilters ? `${style["show"]}` : ""
+            }`}
+          >
             <div className="p-inputgroup mt-3">
               <InputText
                 placeholder="Cidade"

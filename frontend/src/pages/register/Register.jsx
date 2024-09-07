@@ -9,7 +9,7 @@ import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import CpfValidation from "../../validation/cpfValidation";
-import "./Register.css";
+import style from "./Register.module.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -160,7 +160,9 @@ const Register = () => {
 
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
-      <Card className="m-2 container-register grid align-items-center justify-content-center text-center">
+      <Card
+        className={`m-2 ${style["container-register"]} grid align-items-center justify-content-center text-center`}
+      >
         <div className="grid">
           <div className="col-12">
             <Image
