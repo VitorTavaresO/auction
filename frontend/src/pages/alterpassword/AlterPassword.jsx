@@ -1,4 +1,4 @@
-import "./AlterPassword.css";
+import style from "./AlterPassword.module.css";
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Password } from "primereact/password";
@@ -124,7 +124,9 @@ const AlterPassword = () => {
 
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
-      <Card className="container-alter-password m-2 flex flex-column align-items-center justify-content-center text-center">
+      <Card
+        className={`m-2 ${style["container-alter-password"]} flex flex-column align-items-center justify-content-center text-center`}
+      >
         <Image
           src="./images/logo.png"
           alt="Logo"
@@ -132,7 +134,7 @@ const AlterPassword = () => {
           className="logo mb-3"
         />
         <h2>New Password</h2>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <Password
             inputStyle={{ width: "100%" }}
             toggleMask
@@ -155,7 +157,7 @@ const AlterPassword = () => {
           />
           <label htmlFor="password">Password</label>
         </FloatLabel>
-        <FloatLabel className="w-full mb-5 sm:w-25rem md:w-35rem lg:w-45rem xl:w-55rem">
+        <FloatLabel className="w-full mb-5">
           <Password
             inputStyle={{ width: "100%" }}
             toggleMask

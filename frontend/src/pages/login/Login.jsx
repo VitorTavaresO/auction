@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
-import "./Login.css";
+import style from "./Login.module.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +31,9 @@ const Login = () => {
 
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
-      <Card className="m-2 container-login flex flex-column align-items-center justify-content-center text-center">
+      <Card
+        className={`m-2 ${style["container-login"]} flex flex-column align-items-center justify-content-center text-center`}
+      >
         <Image
           src="./images/logo.png"
           alt="Logo"

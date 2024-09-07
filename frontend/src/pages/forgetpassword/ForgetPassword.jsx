@@ -1,4 +1,4 @@
-import "./ForgetPassword.css";
+import style from "./ForgetPassword.module.css";
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
@@ -42,7 +42,9 @@ const ForgetPassword = () => {
 
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
-      <Card className="container-forget-password m-2 flex flex-column align-items-center justify-content-center text-center">
+      <Card
+        className={`m-2 ${style["container-forget-password"]} flex flex-column align-items-center justify-content-center text-center`}
+      >
         <Image
           src="./images/logo.png"
           alt="Logo"

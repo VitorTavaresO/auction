@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AuctionList.css";
+import style from "./AuctionList.module.css";
 import { Card } from "primereact/card";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
@@ -60,7 +60,11 @@ const AuctionList = () => {
               </span>
             </Link>
           </div>
-          <div className={`filter-container ${showFilters ? "show" : ""}`}>
+          <div
+            className={`${style["filter-container"]} ${
+              showFilters ? `${style["show"]}` : ""
+            }`}
+          >
             <div className="p-inputgroup mt-3">
               <InputText
                 placeholder="Cidade"
