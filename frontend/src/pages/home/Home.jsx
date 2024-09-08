@@ -167,7 +167,7 @@ const Home = () => {
             />
           </Card>
         </div>
-        <div className="col-12 lg:col-12">
+        <div className="col-12">
           <Card className="bg-gray-100 flex flex-column align-items-center justify-content-center text-center m-2 h-30rem">
             <h1>Últimos Arrematados</h1>
             <ListBox
