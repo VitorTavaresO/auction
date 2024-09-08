@@ -11,6 +11,18 @@
     "uppercase": "At least one uppercase letter",
     "number": "At least one number",
     "special": "At least one special character",
-    "length": "At least 6 characters"
+    "length": "At least 6 characters",
+    "match": "Passwords must match"
+  },
+  "register": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "cpf": "CPF",
+    "phone": "Phone",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "cancel": "Cancel",
+    "submit": "Register"
   }
 }

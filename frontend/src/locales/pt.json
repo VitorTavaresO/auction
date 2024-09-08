@@ -11,6 +11,18 @@
     "uppercase": "Pelo menos uma letra maiúscula",
     "number": "Pelo menos um número",
     "special": "Pelo menos um caractere especial",
-    "length": "Pelo menos 6 caracteres"
+    "length": "Pelo menos 6 caracteres",
+    "match": "As senhas devem corresponder"
+  },
+  "register": {
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "cpf": "CPF",
+    "phone": "Telefone",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "cancel": "Cancelar",
+    "submit": "Registrar"
   }
 }
