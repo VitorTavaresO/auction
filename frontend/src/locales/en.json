@@ -33,5 +33,16 @@
     "register": "Register",
     "forgot": "Forgot password?",
     "invalid": "Invalid email or password"
+  },
+  "homeDashboard": {
+    "averageFatCattle": "Average Fat Cattle",
+    "averageQuarter": "Average Quarter",
+    "averageActual": "Actual",
+    "finish": "Finish",
+    "totalFinish": "Total Finish",
+    "closedCurrentMonth": "Closed Current Month",
+    "openedCurrentMonth": "Opened Current Month",
+    "lastFinish": "Last Finish",
+    "finalBid": "Final Bid"
   }
 }
