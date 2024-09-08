@@ -14,11 +14,6 @@ const Header = () => {
     i18n.changeLanguage(language);
   };
 
-  const languages = [
-    { label: "English", value: "en" },
-    { label: "Português", value: "pt" },
-  ];
-
   const rightItems = (
     <div className="flex align-items-center">
       <div
