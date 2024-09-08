@@ -24,5 +24,14 @@
     "confirmPassword": "Confirmar Senha",
     "cancel": "Cancelar",
     "submit": "Registrar"
+  },
+  "login": {
+    "login": "Entrar",
+    "email": "Email",
+    "password": "Senha",
+    "submit": "Entrar",
+    "register": "Registrar",
+    "forgot": "Esqueceu a senha?",
+    "invalid": "Email ou senha inválidos"
   }
 }
