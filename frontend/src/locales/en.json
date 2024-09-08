@@ -1,0 +1,16 @@
+{
+  "header": {
+    "auctions": "Auctions",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "password": {
+    "choose": "Choose a password",
+    "required": "Required",
+    "lowercase": "At least one lowercase letter",
+    "uppercase": "At least one uppercase letter",
+    "number": "At least one number",
+    "special": "At least one special character",
+    "length": "At least 6 characters"
+  }
+}

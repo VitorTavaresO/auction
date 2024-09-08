@@ -1,0 +1,16 @@
+{
+  "header": {
+    "auctions": "Leilões",
+    "profile": "Perfil",
+    "logout": "Sair"
+  },
+  "password": {
+    "choose": "Escolha uma senha",
+    "required": "Requerido:",
+    "lowercase": "Pelo menos uma letra minúscula",
+    "uppercase": "Pelo menos uma letra maiúscula",
+    "number": "Pelo menos um número",
+    "special": "Pelo menos um caractere especial",
+    "length": "Pelo menos 6 caracteres"
+  }
+}

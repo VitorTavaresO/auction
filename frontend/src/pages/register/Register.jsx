@@ -10,8 +10,10 @@ import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import CpfValidation from "../../validation/cpfValidation";
 import style from "./Register.module.css";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -62,11 +64,11 @@ const Register = () => {
     passwordCriteria,
   ]);
 
-  const header = <div className="font-bold mb-3">Chose a Password</div>;
+  const header = <div className="font-bold mb-3">{t("password.choose")}</div>;
   const footer = (
     <>
       <Divider />
-      <p className="mt-2">Required</p>
+      <p className="mt-2">{t("password.required")}</p>
       <ul className="pl-2 ml-2 mt-0 line-height-3">
         <li
           className={
@@ -155,7 +157,7 @@ const Register = () => {
       password,
     };
     localStorage.setItem("userData", JSON.stringify(userData));
-    navigate("/profile"); // Redireciona para a página de perfil após o registro
+    navigate("/profile");
   };
 
   return (
