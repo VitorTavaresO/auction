@@ -8,7 +8,10 @@ import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
+import { useTranslation } from "react-i18next";
+
 const AlterPassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -39,46 +42,48 @@ const AlterPassword = () => {
     setIsFormValid(isFormFilled);
   }, [password, confirmPassword, passwordCriteria]);
 
-  const header = <div className="font-bold mb-3">Choose a Password</div>;
+  const header = (
+    <div className="font-bold mb-3">{t("alterPassword.alter")}</div>
+  );
   const footer = (
     <>
       <Divider />
-      <p className="mt-2">Required</p>
+      <p className="mt-2">{t("password.required")}</p>
       <ul className="pl-2 ml-2 mt-0 line-height-3">
         <li
           className={
             passwordCriteria.hasLowerCase ? "text-green-500" : "text-red-500"
           }
         >
-          At least one lowercase
+          {t("password.lowercase")}
         </li>
         <li
           className={
             passwordCriteria.hasUpperCase ? "text-green-500" : "text-red-500"
           }
         >
-          At least one uppercase
+          {t("password.uppercase")}
         </li>
         <li
           className={
             passwordCriteria.hasNumber ? "text-green-500" : "text-red-500"
           }
         >
-          At least one numeric
+          {t("password.number")}
         </li>
         <li
           className={
             passwordCriteria.hasSpecialChar ? "text-green-500" : "text-red-500"
           }
         >
-          At least one special character
+          {t("password.special")}
         </li>
         <li
           className={
             passwordCriteria.minLength ? "text-green-500" : "text-red-500"
           }
         >
-          Minimum 6 characters
+          {t("password.length")}
         </li>
       </ul>
     </>
@@ -100,7 +105,7 @@ const AlterPassword = () => {
     const confirmPassword = e.target.value;
     setConfirmPassword(confirmPassword);
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords must match.");
+      setErrorMessage(t("password.match"));
     } else {
       setErrorMessage("");
     }
@@ -133,7 +138,7 @@ const AlterPassword = () => {
           width="250"
           className="logo mb-3"
         />
-        <h2>New Password</h2>
+        <h2>{t("alterPassword.alter")}</h2>
         <FloatLabel className="w-full mb-5">
           <Password
             inputStyle={{ width: "100%" }}
@@ -155,7 +160,7 @@ const AlterPassword = () => {
               fieldErrors.password ? "p-invalid" : ""
             }`}
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("alterPassword.newPassword")}</label>
         </FloatLabel>
         <FloatLabel className="w-full mb-5">
           <Password
@@ -171,16 +176,18 @@ const AlterPassword = () => {
               fieldErrors.confirmPassword ? "p-invalid" : ""
             }`}
           />
-          <label htmlFor="confirm-password">Confirm Password</label>
+          <label htmlFor="confirm-password">
+            {t("alterPassword.confirmPassword")}
+          </label>
         </FloatLabel>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <Button
-          label="Cancel"
+          label={t("alterPassword.cancel")}
           className="mb-3 w-full bg-red-500 border-red-500"
           onClick={handleGoBack}
         />
         <Button
-          label="Submit"
+          label={t("alterPassword.submit")}
           className={`mb-4 w-full ${
             isFormValid
               ? "bg-green-500 border-green-500"

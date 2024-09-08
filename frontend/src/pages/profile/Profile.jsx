@@ -7,8 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Image } from "primereact/image";
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "primereact/button";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [cityFilter, setCityFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState(null);
@@ -32,7 +34,7 @@ const Profile = () => {
       setProfile((prevProfile) => ({
         ...prevProfile,
         name: storedUserData.firstName + " " + storedUserData.lastName,
-        role: storedUserData.role || "Vendendor",
+        role: storedUserData.role || "Cliente",
         phone: storedUserData.phone,
         email: storedUserData.email,
         image: storedUserAvatar || "/images/avatar.png",
@@ -82,7 +84,7 @@ const Profile = () => {
           <h2>{profile.name}</h2>
           <h3>{profile.role}</h3>
           <Button
-            label="Editar Perfil"
+            label={t("profile.edit")}
             className="w-full h-2rem bg-gray-600 border-gray-600"
             onClick={handleEditUserDataClick}
           />
@@ -114,7 +116,7 @@ const Profile = () => {
               </span>
             </Link>
             <InputText
-              placeholder="Busca"
+              placeholder={t("profile.search")}
               className="w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}

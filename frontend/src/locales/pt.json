@@ -33,5 +33,50 @@
     "register": "Registrar",
     "forgot": "Esqueceu a senha?",
     "invalid": "Email ou senha inválidos"
+  },
+  "homeDashboard": {
+    "averageFatCattle": "Média de Boi Gordo",
+    "averageQuarter": "Média do Trimestre",
+    "averageActual": "Atual",
+    "finish": "Arremates",
+    "totalFinish": "Total de Arremates",
+    "closedCurrentMonth": "Fechados no Mês Atual",
+    "openedCurrentMonth": "Abertos no Mês Atual",
+    "lastFinish": "Últimos Arremates",
+    "finalBid": "Último Lance"
+  },
+  "profile": {
+    "edit": "Editar Perfil",
+    "search": "Buscar"
+  },
+  "editUserData": {
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "cpf": "CPF",
+    "phone": "Telefone",
+    "email": "Email",
+    "cep": "CEP",
+    "street": "Rua",
+    "number": "Número",
+    "neighborhood": "Bairro",
+    "city": "Cidade",
+    "state": "Estado",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "cancel": "Cancelar",
+    "submit": "Salvar"
+  },
+  "forgetPassword": {
+    "recover": "Recuperar Senha",
+    "email": "Email",
+    "cancel": "Cancelar",
+    "submit": "Enviar"
+  },
+  "alterPassword": {
+    "alter": "Alterar Senha",
+    "newPassword": "Nova Senha",
+    "confirmPassword": "Confirmar Senha",
+    "cancel": "Cancelar",
+    "submit": "Enviar"
   }
 }

@@ -8,8 +8,10 @@ import { Button } from "primereact/button";
 import { FileUpload } from "primereact/fileupload";
 import CpfValidation from "../../validation/cpfValidation";
 import style from "./EditUserData.module.css";
+import { useTranslation } from "react-i18next";
 
 const EditUserData = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -197,7 +199,7 @@ const EditUserData = () => {
                 required
                 className={`w-full ${fieldErrors.firstName ? "p-invalid" : ""}`}
               />
-              <label htmlFor="first-name">First Name</label>
+              <label htmlFor="first-name">{t("editUserData.firstName")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -210,7 +212,7 @@ const EditUserData = () => {
                 required
                 className={`w-full ${fieldErrors.lastName ? "p-invalid" : ""}`}
               />
-              <label htmlFor="last-name">Last Name</label>
+              <label htmlFor="last-name">{t("editUserData.lastName")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -243,7 +245,7 @@ const EditUserData = () => {
                   className={`w-full ${fieldErrors.cpf ? "p-invalid" : ""}`}
                 />
               )}
-              <label htmlFor="cpf">CPF</label>
+              <label htmlFor="cpf">{t("editUserData.cpf")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -269,7 +271,7 @@ const EditUserData = () => {
                   className={`w-full ${fieldErrors.phone ? "p-invalid" : ""}`}
                 />
               )}
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">{t("editUserData.phone")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -283,7 +285,7 @@ const EditUserData = () => {
                 required
                 className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
               />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t("editUserData.email")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -306,7 +308,7 @@ const EditUserData = () => {
                   value={cep}
                 />
               )}
-              <label htmlFor="cep">CEP</label>
+              <label htmlFor="cep">{t("editUserData.cep")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-9 col-12">
@@ -318,7 +320,7 @@ const EditUserData = () => {
                 onBlur={() => handleFieldBlur("street", street)}
                 className={`w-full ${fieldErrors.street ? "p-invalid" : ""}`}
               />
-              <label htmlFor="street">Rua</label>
+              <label htmlFor="street">{t("editUserData.street")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -330,7 +332,7 @@ const EditUserData = () => {
                 onBlur={() => handleFieldBlur("number", number)}
                 className={`w-full ${fieldErrors.number ? "p-invalid" : ""}`}
               />
-              <label htmlFor="number">Número</label>
+              <label htmlFor="number">{t("editUserData.number")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-9 col-12">
@@ -344,7 +346,9 @@ const EditUserData = () => {
                   fieldErrors.neighborhood ? "p-invalid" : ""
                 }`}
               />
-              <label htmlFor="neighborhood">Bairro</label>
+              <label htmlFor="neighborhood">
+                {t("editUserData.neighborhood")}
+              </label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -356,7 +360,7 @@ const EditUserData = () => {
                 onBlur={() => handleFieldBlur("city", city)}
                 className={`w-full ${fieldErrors.city ? "p-invalid" : ""}`}
               />
-              <label htmlFor="city">Cidade</label>
+              <label htmlFor="city">{t("editUserData.city")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -368,7 +372,7 @@ const EditUserData = () => {
                 onBlur={() => handleFieldBlur("state", state)}
                 className={`w-full ${fieldErrors.state ? "p-invalid" : ""}`}
               />
-              <label htmlFor="state">Estado</label>
+              <label htmlFor="state">{t("editUserData.state")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-12 col-12">
@@ -384,14 +388,14 @@ const EditUserData = () => {
           </div>
           <div className="sm:col-6 col-12">
             <Button
-              label="Cancel"
+              label={t("editUserData.cancel")}
               className="mb-3 w-full bg-red-500 border-red-500"
               onClick={handleGoBack}
             />
           </div>
           <div className="sm:col-6 col-12">
             <Button
-              label="Submit"
+              label={t("editUserData.submit")}
               className={`mb-4 w-full ${
                 isFormValid
                   ? "bg-green-500 border-green-500"
