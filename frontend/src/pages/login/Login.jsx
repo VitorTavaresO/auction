@@ -8,8 +8,10 @@ import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 import style from "./Login.module.css";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -25,7 +27,7 @@ const Login = () => {
       localStorage.setItem("token", "token");
       navigate("/");
     } else {
-      setErrorMessage("Invalid email or password.");
+      setErrorMessage(t("login.invalid"));
     }
   };
 
@@ -40,14 +42,14 @@ const Login = () => {
           width="250"
           className="logo mb-3"
         />
-        <h2>Login</h2>
+        <h2>{t("login.login")}</h2>
         <FloatLabel className="w-full mb-5">
           <InputText
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full"
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("login.email")}</label>
         </FloatLabel>
         <FloatLabel className="w-full mb-5">
           <Password
@@ -58,24 +60,24 @@ const Login = () => {
             toggleMask
             className="w-full"
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("login.password")}</label>
         </FloatLabel>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <Link to="/forget-password" className="w-full">
           <Button
-            label="Forget Password?"
+            label={t("login.forgot")}
             link
             className="mb-3 w-full text-green-500"
           />
         </Link>
         <Button
-          label="Submit"
+          label={t("login.submit")}
           className="w-full bg-green-500 border-green-500"
           onClick={handleLogin}
         />
         <Link to="/register" className="w-full">
           <Button
-            label="Register"
+            label={t("login.register")}
             className="w-full mt-6 bg-green-500 border-green-500"
           />
         </Link>

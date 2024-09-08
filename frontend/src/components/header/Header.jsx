@@ -1,46 +1,67 @@
 import React from "react";
+import { useRef } from "react";
 import "./Header.css";
 import { Menubar } from "primereact/menubar";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
-  const items = [
+  const overlayPanelRef = useRef(null);
+
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
+
+  const languages = [
+    { label: "English", value: "en" },
+    { label: "Português", value: "pt" },
+  ];
+
+  const rightItems = (
+    <div className="flex align-items-center">
+      <div
+        className="flex align-items-center"
+        onClick={(e) => overlayPanelRef.current.toggle(e)}
+        style={{ cursor: "pointer", color: "#ffd700", marginRight: "10px" }}
+      >
+        <i className="pi pi-fw pi-globe" />
+      </div>
+
+      <div
+        className="flex align-items-center"
+        onClick={() => {
+          localStorage.removeItem("token");
+          window.location = "/login";
+        }}
+        style={{ cursor: "pointer", color: "#ffd700", marginLeft: "10px" }}
+      >
+        <i className="pi pi-fw pi-sign-out" />
+      </div>
+    </div>
+  );
+
+  const centerItems = [
     {
-      label: "Leilões",
+      label: "Home",
+      icon: "pi pi-fw pi-home",
+      command: () => {
+        window.location = "/";
+      },
+    },
+    {
+      label: t("header.auctions"),
       icon: "pi pi-fw pi-hammer",
       command: () => {
         window.location = "/auction-list";
       },
     },
     {
-      label: (
-        <div className="menu-item-label">
-          <i className="pi pi-fw pi-home mobile-only"></i>
-          <img
-            src={"./images/logo.png"}
-            alt="Home Icon"
-            className="menubar-logo desktop-only"
-            style={{ width: "150px", height: "100px" }}
-          />
-          <span className="mobile-only ml-2"> Home</span>
-        </div>
-      ),
-      command: () => {
-        window.location = "/";
-      },
-    },
-    {
-      label: "Perfil",
+      label: t("header.profile"),
       icon: "pi pi-fw pi-user",
       command: () => {
         window.location = "/profile";
-      },
-    },
-    {
-      label: "Logout",
-      icon: "pi pi-fw pi-sign-out",
-      command: () => {
-        localStorage.removeItem("token");
-        window.location = "/login";
       },
     },
   ];
@@ -49,8 +70,23 @@ const Header = () => {
     <>
       <Menubar
         className="menubar-custom justify-content-center bg-gray-800 border-gray-800"
-        model={items}
+        model={centerItems}
+        end={rightItems}
       />
+      <OverlayPanel ref={overlayPanelRef} dismissable>
+        <div
+          onClick={() => changeLanguage("en")}
+          className="overlay-item w-full"
+        >
+          English
+        </div>
+        <div
+          onClick={() => changeLanguage("pt")}
+          className="overlay-item w-full"
+        >
+          Português
+        </div>
+      </OverlayPanel>
     </>
   );
 };

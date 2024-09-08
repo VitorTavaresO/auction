@@ -5,6 +5,7 @@ import { ListBox } from "primereact/listbox";
 import "./Home.css";
 import auctionClosed from "./mock-json/auction-closed.json";
 import auctionList from "./mock-json/auction-list.json";
+import { useTranslation } from "react-i18next";
 
 const calculateAverageArrobaValue = (data) => {
   const groupNames = Object.keys(data);
@@ -24,9 +25,9 @@ const calculateAverageArrobaValue = (data) => {
   return { groupNames, averages };
 };
 
-const calculateTotalArremates = (data) => {
+const calculatetotalFinish = (data) => {
   const groupNames = Object.keys(data);
-  const totalArremates = groupNames.reduce((sum, groupName) => {
+  const totalFinish = groupNames.reduce((sum, groupName) => {
     const group = data[groupName];
     const closedArremates = group.filter(
       (auction) => auction.status === "closed"
@@ -34,18 +35,19 @@ const calculateTotalArremates = (data) => {
     return sum + closedArremates.length;
   }, 0);
 
-  return totalArremates;
+  return totalFinish;
 };
 
 const Home = () => {
+  const { t } = useTranslation();
   const { groupNames: closedGroupNames, averages: closedAverages } =
     calculateAverageArrobaValue(auctionClosed);
   const { groupNames: listGroupNames, averages: listAverages } =
     calculateAverageArrobaValue(auctionList);
 
-  const totalArrematesFechados = calculateTotalArremates(auctionClosed);
-  const totalArrematesMesAtual = calculateTotalArremates(auctionList);
-  const totalArremates = totalArrematesFechados + totalArrematesMesAtual;
+  const totalFinishClosed = calculatetotalFinish(auctionClosed);
+  const totalFinishCurrentMonth = calculatetotalFinish(auctionList);
+  const totalFinish = totalFinishClosed + totalFinishCurrentMonth;
 
   const allGroupNames = [...closedGroupNames, ...listGroupNames];
   const allAverages = [...closedAverages, ...listAverages];
@@ -53,11 +55,13 @@ const Home = () => {
   const lastFiveAuctions = Object.values(auctionClosed).flat().slice(-5);
 
   const auctionItems = lastFiveAuctions.map((auction, index) => ({
-    label: `Arrobas: ${auction.arrobas} - Lance Final: R$${auction.finalBid}`,
+    label: `Arrobas: ${auction.arrobas} - ${t("homeDashboard.finalBid")}: R$${
+      auction.finalBid
+    }`,
     value: index,
   }));
 
-  const arrematesPorMes = [
+  const finishPerMonth = [
     ...closedGroupNames.map((groupName) => {
       const group = auctionClosed[groupName];
       const closedArremates = group.filter(
@@ -79,8 +83,8 @@ const Home = () => {
       <div className="grid m-1">
         <div className="col-12 lg:col-4">
           <Card className="bg-gray-100 flex flex-column align-items-center justify-content-center text-center m-2 h-30rem">
-            <h1>Média Boi Gordo</h1>
-            <h2>Média Trimestre</h2>
+            <h1>{t("homeDashboard.averageFatCattle")}</h1>
+            <h2>{t("homeDashboard.averageQuarter")}</h2>
             <h3 className="text-green-600">
               R${" "}
               {(
@@ -88,7 +92,7 @@ const Home = () => {
                 closedAverages.length
               ).toFixed(2)}
             </h3>
-            <h2>Atual</h2>
+            <h2>{t("homeDashboard.averageActual")}</h2>
             <h3 className="text-red-600">
               R${" "}
               {(
@@ -106,7 +110,7 @@ const Home = () => {
                 labels: allGroupNames,
                 datasets: [
                   {
-                    label: "Boi Gordo",
+                    label: t("homeDashboard.averageFatCattle"),
                     data: allAverages,
                     fill: false,
                     borderColor: "#ffd700",
@@ -125,15 +129,15 @@ const Home = () => {
         </div>
         <div className="col-12 lg:col-4">
           <Card className="bg-gray-100 flex flex-column align-items-center justify-content-center text-center m-2 h-30rem">
-            <h1>Arremates</h1>
-            <h2>Total Fechados</h2>
-            <h3 className="text-green-600">{totalArremates}</h3>
-            <h2>Fechados Mês Atual</h2>
-            <h3 className="text-green-600">{totalArrematesMesAtual}</h3>
-            <h2>Abertos Mês Atual</h2>
+            <h1>{t("homeDashboard.finish")}</h1>
+            <h2>{t("homeDashboard.totalFinish")}</h2>
+            <h3 className="text-green-600">{totalFinish}</h3>
+            <h2>{t("homeDashboard.closedCurrentMonth")}</h2>
+            <h3 className="text-green-600">{totalFinishCurrentMonth}</h3>
+            <h2>{t("homeDashboard.openedCurrentMonth")}</h2>
             <h3 className="text-red-600">
               {Object.values(auctionList).flat().length -
-                totalArrematesMesAtual}
+                totalFinishCurrentMonth}
             </h3>
           </Card>
         </div>
@@ -146,8 +150,8 @@ const Home = () => {
                 labels: allGroupNames,
                 datasets: [
                   {
-                    label: "Arremates por Mês",
-                    data: arrematesPorMes,
+                    label: t("homeDashboard.finish"),
+                    data: finishPerMonth,
                     backgroundColor: "#ffd700",
                   },
                 ],
@@ -169,7 +173,7 @@ const Home = () => {
         </div>
         <div className="col-12">
           <Card className="bg-gray-100 flex flex-column align-items-center justify-content-center text-center m-2 h-30rem">
-            <h1>Últimos Arrematados</h1>
+            <h1>{t("homeDashboard.lastFinish")}</h1>
             <ListBox
               className=""
               value={null}

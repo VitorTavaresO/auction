@@ -7,7 +7,10 @@ import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
+import { useTranslation } from "react-i18next";
+
 const ForgetPassword = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -51,7 +54,7 @@ const ForgetPassword = () => {
           width="250"
           className="logo mb-3"
         />
-        <h2>Recover Password</h2>
+        <h2>{t("forgetPassword.recover")}</h2>
         <FloatLabel className="w-full mb-5">
           <InputText
             value={email}
@@ -62,15 +65,15 @@ const ForgetPassword = () => {
             required
             className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("forgetPassword.email")}</label>
         </FloatLabel>
         <Button
-          label="Cancel"
+          label={t("forgetPassword.cancel")}
           className="mb-3 w-full bg-red-500 border-red-500"
           onClick={handleGoBack}
         />
         <Button
-          label="Submit"
+          label={t("forgetPassword.submit")}
           className={`mb-4 w-full ${
             isFormValid
               ? "bg-green-500 border-green-500"

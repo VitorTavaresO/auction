@@ -10,8 +10,10 @@ import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
 import CpfValidation from "../../validation/cpfValidation";
 import style from "./Register.module.css";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -62,46 +64,46 @@ const Register = () => {
     passwordCriteria,
   ]);
 
-  const header = <div className="font-bold mb-3">Chose a Password</div>;
+  const header = <div className="font-bold mb-3">{t("password.choose")}</div>;
   const footer = (
     <>
       <Divider />
-      <p className="mt-2">Required</p>
+      <p className="mt-2">{t("password.required")}</p>
       <ul className="pl-2 ml-2 mt-0 line-height-3">
         <li
           className={
             passwordCriteria.hasLowerCase ? "text-green-500" : "text-red-500"
           }
         >
-          At least one lowercase
+          {t("password.lowercase")}
         </li>
         <li
           className={
             passwordCriteria.hasUpperCase ? "text-green-500" : "text-red-500"
           }
         >
-          At least one uppercase
+          {t("password.uppercase")}
         </li>
         <li
           className={
             passwordCriteria.hasNumber ? "text-green-500" : "text-red-500"
           }
         >
-          At least one numeric
+          {t("password.number")}
         </li>
         <li
           className={
             passwordCriteria.hasSpecialChar ? "text-green-500" : "text-red-500"
           }
         >
-          At least one special character
+          {t("password.special")}
         </li>
         <li
           className={
             passwordCriteria.minLength ? "text-green-500" : "text-red-500"
           }
         >
-          Minimum 6 characters
+          {t("password.length")}
         </li>
       </ul>
     </>
@@ -123,7 +125,7 @@ const Register = () => {
     const confirmPassword = e.target.value;
     setConfirmPassword(confirmPassword);
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords must match.");
+      setErrorMessage(t("password.match"));
     } else {
       setErrorMessage("");
     }
@@ -155,7 +157,7 @@ const Register = () => {
       password,
     };
     localStorage.setItem("userData", JSON.stringify(userData));
-    navigate("/profile"); // Redireciona para a página de perfil após o registro
+    navigate("/profile");
   };
 
   return (
@@ -182,7 +184,7 @@ const Register = () => {
                 required
                 className={`w-full ${fieldErrors.firstName ? "p-invalid" : ""}`}
               />
-              <label htmlFor="first-name">First Name</label>
+              <label htmlFor="first-name">{t("register.firstName")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -195,7 +197,7 @@ const Register = () => {
                 required
                 className={`w-full ${fieldErrors.lastName ? "p-invalid" : ""}`}
               />
-              <label htmlFor="last-name">Last Name</label>
+              <label htmlFor="last-name">{t("register.lastName")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -213,7 +215,7 @@ const Register = () => {
                 invalid={!cpfIsValid}
                 className={`w-full ${fieldErrors.cpf ? "p-invalid" : ""}`}
               />
-              <label htmlFor="cpf">CPF</label>
+              <label htmlFor="cpf">{t("register.cpf")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-3 col-12">
@@ -228,7 +230,7 @@ const Register = () => {
                 required
                 className={`w-full ${fieldErrors.phone ? "p-invalid" : ""}`}
               />
-              <label htmlFor="phone">Phone</label>
+              <label htmlFor="phone">{t("register.phone")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -242,7 +244,7 @@ const Register = () => {
                 required
                 className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
               />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{t("register.email")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -265,7 +267,7 @@ const Register = () => {
                 }
                 className={`w-full ${fieldErrors.password ? "p-invalid" : ""}`}
               />
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{t("register.password")}</label>
             </FloatLabel>
           </div>
           <div className="sm:col-6 col-12">
@@ -285,7 +287,9 @@ const Register = () => {
                   fieldErrors.confirmPassword ? "p-invalid" : ""
                 }`}
               />
-              <label htmlFor="confirm-password">Confirm Password</label>
+              <label htmlFor="confirm-password">
+                {t("register.confirmPassword")}
+              </label>
             </FloatLabel>
           </div>
           <div className="col-12">
@@ -293,14 +297,14 @@ const Register = () => {
           </div>
           <div className="sm:col-6 col-12">
             <Button
-              label="Cancel"
+              label={t("register.cancel")}
               className="mb-3 w-full bg-red-500 border-red-500"
               onClick={handleGoBack}
             />
           </div>
           <div className="sm:col-6 col-12">
             <Button
-              label="Submit"
+              label={t("register.submit")}
               className={`mb-4 w-full ${
                 isFormValid
                   ? "bg-green-500 border-green-500"

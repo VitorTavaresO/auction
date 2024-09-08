@@ -1,0 +1,82 @@
+{
+  "header": {
+    "auctions": "Auctions",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "password": {
+    "choose": "Choose a password",
+    "required": "Required",
+    "lowercase": "At least one lowercase letter",
+    "uppercase": "At least one uppercase letter",
+    "number": "At least one number",
+    "special": "At least one special character",
+    "length": "At least 6 characters",
+    "match": "Passwords must match"
+  },
+  "register": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "cpf": "CPF",
+    "phone": "Phone",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "cancel": "Cancel",
+    "submit": "Register"
+  },
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "register": "Register",
+    "forgot": "Forgot password?",
+    "invalid": "Invalid email or password"
+  },
+  "homeDashboard": {
+    "averageFatCattle": "Average Fat Cattle",
+    "averageQuarter": "Average Quarter",
+    "averageActual": "Actual",
+    "finish": "Finish",
+    "totalFinish": "Total Finish",
+    "closedCurrentMonth": "Closed Current Month",
+    "openedCurrentMonth": "Opened Current Month",
+    "lastFinish": "Last Finish",
+    "finalBid": "Final Bid"
+  },
+  "profile": {
+    "edit": "Edit Profile",
+    "search": "Search"
+  },
+  "editUserData": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "cpf": "CPF",
+    "phone": "Phone",
+    "email": "Email",
+    "cep": "CEP",
+    "street": "Street",
+    "number": "Number",
+    "neighborhood": "Neighborhood",
+    "city": "City",
+    "state": "State",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  },
+  "forgetPassword": {
+    "recover": "Recover Password",
+    "email": "Email",
+    "cancel": "Cancel",
+    "submit": "Send"
+  },
+  "alterPassword": {
+    "alter": "Alter Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "cancel": "Cancel",
+    "submit": "Submit"
+  }
+}
