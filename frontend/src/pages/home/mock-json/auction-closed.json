@@ -1,0 +1,158 @@
+{
+  "junho": [
+    {
+      "arrobas": 15.4,
+      "initialBid": 3735.0,
+      "finalBid": 3805.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.25,
+      "initialBid": 3965.0,
+      "finalBid": 3870.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.1,
+      "initialBid": 4165.0,
+      "finalBid": 3995.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.8,
+      "initialBid": 3875.0,
+      "finalBid": 3900.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.1,
+      "initialBid": 3950.0,
+      "finalBid": 3945.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.6,
+      "initialBid": 4060.0,
+      "finalBid": 4000.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.2,
+      "initialBid": 3950.0,
+      "finalBid": 3930.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.0,
+      "initialBid": 4170.0,
+      "finalBid": 4050.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.9,
+      "initialBid": 3890.0,
+      "finalBid": 3900.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.4,
+      "initialBid": 4010.0,
+      "finalBid": 4000.0,
+      "status": "closed"
+    }
+  ],
+  "julho": [
+    {
+      "arrobas": 16.0,
+      "initialBid": 3920.0,
+      "finalBid": 4000.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.5,
+      "initialBid": 4045.0,
+      "finalBid": 4100.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.0,
+      "initialBid": 4165.0,
+      "finalBid": 4200.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.9,
+      "initialBid": 3895.0,
+      "finalBid": 3950.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.3,
+      "initialBid": 4240.0,
+      "finalBid": 4300.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.5,
+      "initialBid": 3790.0,
+      "finalBid": 3850.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.4,
+      "initialBid": 4010.0,
+      "finalBid": 4050.0,
+      "status": "closed"
+    }
+  ],
+  "agosto": [
+    {
+      "arrobas": 16.3,
+      "initialBid": 3990.0,
+      "finalBid": 4050.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.8,
+      "initialBid": 4115.0,
+      "finalBid": 4200.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.2,
+      "initialBid": 4200.0,
+      "finalBid": 4300.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.7,
+      "initialBid": 3870.0,
+      "finalBid": 3950.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.2,
+      "initialBid": 3950.0,
+      "finalBid": 4050.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 17.0,
+      "initialBid": 4170.0,
+      "finalBid": 4250.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 15.9,
+      "initialBid": 3890.0,
+      "finalBid": 4000.0,
+      "status": "closed"
+    },
+    {
+      "arrobas": 16.4,
+      "initialBid": 4010.0,
+      "finalBid": 4100.0,
+      "status": "closed"
+    }
+  ]
+}
