@@ -1,0 +1,14 @@
+{
+  "setembro": [
+    { "id": 1, "arrobas": 15.4, "initialBid": 3400.0, "finalBid": 3500.0 },
+    { "id": 2, "arrobas": 16.25, "initialBid": 3750.0, "finalBid": 3800.0 },
+    { "id": 3, "arrobas": 17.1, "initialBid": 4100.0, "finalBid": 4200.0 },
+    { "id": 4, "arrobas": 15.8, "initialBid": 3850.0, "finalBid": 3900.0 },
+    { "id": 5, "arrobas": 16.0, "initialBid": 3900.0, "finalBid": 4000.0 },
+    { "id": 6, "arrobas": 16.5, "initialBid": 4000.0, "finalBid": 4100.0 },
+    { "id": 7, "arrobas": 17.0, "initialBid": 4150.0, "finalBid": 4250.0 },
+    { "id": 8, "arrobas": 15.9, "initialBid": 3850.0, "finalBid": 3950.0 },
+    { "id": 9, "arrobas": 16.3, "initialBid": 3950.0, "finalBid": 4050.0 },
+    { "id": 10, "arrobas": 16.8, "initialBid": 4050.0, "finalBid": 4150.0 }
+  ]
+}
