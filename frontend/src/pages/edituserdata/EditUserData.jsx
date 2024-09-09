@@ -28,6 +28,7 @@ const EditUserData = () => {
   const [phoneInputType, setPhoneInputType] = useState("text");
   const [cep, setCep] = useState("");
   const [cepInputType, setCepInputType] = useState("text");
+  const [cepIsValid, setCepIsValid] = useState(true);
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
@@ -36,60 +37,6 @@ const EditUserData = () => {
   const [userAvatar, setUserAvatar] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log("Latitude:", latitude);
-        console.log("Longitude:", longitude);
-        try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-          );
-          const data = await response.json();
-          if (data.address) {
-            setStreet(data.address.road || "");
-            setNeighborhood(
-              data.address.neighbourhood || data.address.suburb || ""
-            );
-            setCity(data.address.town || "");
-            setState(data.address.state || "");
-            setCep(data.address.postcode || "");
-          }
-        } catch (error) {
-          console.error("Erro ao buscar endereço:", error);
-        }
-      },
-      (error) => {
-        console.error("Erro ao obter localização:", error);
-      }
-    );
-
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-    const storedUserAddress = JSON.parse(localStorage.getItem("userAddress"));
-    const storedUserAvatar = localStorage.getItem("userAvatar");
-    if (storedUserData) {
-      setFirstName(storedUserData.firstName);
-      setLastName(storedUserData.lastName);
-      setCPF(storedUserData.cpf);
-      console.log(storedUserData.cpf);
-      setEmail(storedUserData.email);
-      setPhone(storedUserData.phone);
-      console.log(storedUserData.phone);
-    }
-    if (storedUserAddress) {
-      setCep(storedUserAddress.cep || "");
-      setStreet(storedUserAddress.street || "");
-      setNumber(storedUserAddress.number || "");
-      setNeighborhood(storedUserAddress.neighborhood || "");
-      setCity(storedUserAddress.city || "");
-      setState(storedUserAddress.state || "");
-    }
-    if (storedUserAvatar) {
-      setUserAvatar(storedUserAvatar);
-    }
-  }, []);
 
   useEffect(() => {
     const isFormFilled = firstName && lastName && cpf && email && phone;
@@ -160,16 +107,18 @@ const EditUserData = () => {
       const data = await response.json();
 
       if (data.erro) {
-        alert("CEP não encontrado.");
+        setCepIsValid(false);
         return;
       }
 
+      setCepIsValid(true);
       setStreet(data.logradouro || "");
       setNeighborhood(data.bairro || "");
       setCity(data.localidade || "");
       setState(data.uf || "");
     } catch (error) {
       console.error("Erro ao buscar endereço:", error);
+      setCepIsValid(false);
     }
   };
 
@@ -177,10 +126,70 @@ const EditUserData = () => {
     const newCep = e.target.value;
     setCep(newCep);
 
-    if (newCep.length === 9) {
+    const cepPattern = /^\d{5}-\d{3}$/;
+    if (cepPattern.test(newCep)) {
       fetchAddress(newCep);
+      console.log(newCep.length);
     }
   };
+
+  useEffect(() => {
+    const storedUserAddress = JSON.parse(localStorage.getItem("userAddress"));
+
+    if (!storedUserAddress || !storedUserAddress.cep) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          console.log("Latitude:", latitude);
+          console.log("Longitude:", longitude);
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            );
+            const data = await response.json();
+            if (data.address) {
+              setStreet(data.address.road || "");
+              setNeighborhood(
+                data.address.neighbourhood || data.address.suburb || ""
+              );
+              setCity(data.address.town || "");
+              setState(data.address.state || "");
+              setCep(data.address.postcode || "");
+            }
+          } catch (error) {
+            console.error("Erro ao buscar endereço:", error);
+          }
+        },
+        (error) => {
+          console.error("Erro ao obter localização:", error);
+        }
+      );
+    }
+
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    const storedUserAvatar = localStorage.getItem("userAvatar");
+
+    if (storedUserData) {
+      setFirstName(storedUserData.firstName);
+      setLastName(storedUserData.lastName);
+      setCPF(storedUserData.cpf);
+      setEmail(storedUserData.email);
+      setPhone(storedUserData.phone);
+    }
+
+    if (storedUserAddress) {
+      setCep(storedUserAddress.cep || "");
+      setStreet(storedUserAddress.street || "");
+      setNumber(storedUserAddress.number || "");
+      setNeighborhood(storedUserAddress.neighborhood || "");
+      setCity(storedUserAddress.city || "");
+      setState(storedUserAddress.state || "");
+    }
+
+    if (storedUserAvatar) {
+      setUserAvatar(storedUserAvatar);
+    }
+  }, []);
 
   return (
     <div className="flex align-items-center justify-content-center">
@@ -295,7 +304,9 @@ const EditUserData = () => {
                   onChange={handleCepChange}
                   onFocus={handleCepFocus}
                   onBlur={() => handleFieldBlur("cep", cep)}
-                  className={`w-full ${fieldErrors.cep ? "p-invalid" : ""}`}
+                  className={`w-full ${
+                    fieldErrors.cep || !cepIsValid ? "p-invalid" : ""
+                  }`}
                   value={cep}
                 />
               ) : (
@@ -304,7 +315,9 @@ const EditUserData = () => {
                   onChange={handleCepChange}
                   onFocus={() => handleFieldFocus("cep")}
                   onBlur={() => handleFieldBlur("cep", cep)}
-                  className={`w-full ${fieldErrors.cep ? "p-invalid" : ""}`}
+                  className={`w-full ${
+                    fieldErrors.cep || !cepIsValid ? "p-invalid" : ""
+                  }`}
                   value={cep}
                 />
               )}
