@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auction.backend.model.Profile;
 import com.auction.backend.services.ProfileService;
 
-import jakarta.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("api/profile")
 public class ProfileController {
