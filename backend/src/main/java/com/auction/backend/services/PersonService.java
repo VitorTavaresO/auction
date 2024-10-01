@@ -21,7 +21,9 @@ public class PersonService {
     public Person update(Person Person){
         Person savedPerson = personRepository.findById(Person.getId()).orElseThrow(() -> new NoSuchElementException("Person not found"));
         savedPerson.setName(Person.getName());
+        savedPerson.setEmail(Person.getEmail());
         return personRepository.save(savedPerson);
     }
+    
 
 }
