@@ -25,14 +25,14 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "{name.required}")
     private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email is invalid")
+    @NotBlank(message =  "{email.required}")
+    @Email(message =  "{email.invalid}")
     private String email;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message =  "{password.required}")
     private String password;
     private String validationCode;
     private LocalDateTime validationCodeValidity;
