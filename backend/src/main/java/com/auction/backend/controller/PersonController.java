@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.auction.backend.model.Person;
 import com.auction.backend.model.PersonAuthRequestDTO;
+import com.auction.backend.model.PersonAuthResponseDTO;
 import com.auction.backend.security.JwtService;
 import com.auction.backend.services.PersonService;
 
@@ -31,9 +32,9 @@ public class PersonController {
     private JwtService jwtService;
 
     @PostMapping("/login")
-    public String authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){
+    public PersonAuthResponseDTO authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
-        return jwtService.generateToken(authentication.getName());
+        return new PersonAuthResponseDTO(authRequest.getEmail(), jwtService.generateToken(authentication.getName()));
     }
     
 
