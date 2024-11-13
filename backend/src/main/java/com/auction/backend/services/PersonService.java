@@ -2,7 +2,6 @@ package com.auction.backend.services;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import jakarta.mail.MessagingException;
 
 @Service
 public class PersonService implements UserDetailsService {
-    
+
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int CODE_LENGTH = 5;
     private static final SecureRandom RANDOM = new SecureRandom();
