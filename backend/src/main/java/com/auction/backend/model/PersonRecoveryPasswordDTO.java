@@ -14,4 +14,12 @@ public class PersonRecoveryPasswordDTO {
     public String getEmail() {
         return email;
     }
+
+    public String getValidationCode() {
+        return validationCode;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
 }

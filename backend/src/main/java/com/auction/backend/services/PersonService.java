@@ -68,7 +68,7 @@ public class PersonService implements UserDetailsService {
         return code;
     }
 
-    public PersonRecoveryPasswordDTO sendValidationCode(String email) {
+    public String sendValidationCode(String email) {
         Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Person not found"));
         Context context = new Context();
         String validationCode = generateRandomCode();
@@ -80,11 +80,24 @@ public class PersonService implements UserDetailsService {
         try {
             emailService.sendTemplateEmail(person.getEmail(), "Código de validação", context, "emailValidationCode");
         } catch (MessagingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return new PersonRecoveryPasswordDTO(person.getEmail(), validationCode, null);
+        return validationCode;
 
-    }   
+    }
+    
+    public boolean recoveryPassword (PersonRecoveryPasswordDTO personRecoveryPasswordDTO) {
+        Person person = personRepository.findByEmail(personRecoveryPasswordDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Person not found"));
+
+        if (personRecoveryPasswordDTO.getValidationCode().equals(person.getValidationCode()) && person.getValidationCodeValidity().isAfter(LocalDateTime.now())) {
+            person.setPassword(personRecoveryPasswordDTO.getNewPassword());
+            person.setValidationCode(null);
+            person.setValidationCodeValidity(null);
+            personRepository.save(person);
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid validation code");
+        }
+    }
 
 }

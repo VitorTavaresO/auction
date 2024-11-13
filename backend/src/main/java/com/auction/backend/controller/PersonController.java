@@ -1,5 +1,7 @@
 package com.auction.backend.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,8 +42,14 @@ public class PersonController {
     }
 
     @PostMapping("/send-validation-code")
-    public PersonRecoveryPasswordDTO sendValidationCode(@RequestBody PersonRecoveryPasswordDTO recoveryPasswordDTO){
-        return personService.sendValidationCode(recoveryPasswordDTO.getEmail());
+    public String sendValidationCode(@RequestBody Map<String, String> json){
+        String email = json.get("email");
+        return personService.sendValidationCode(email);
+    }
+
+    @PostMapping("/recovery-password")
+    public boolean recoveryPassword(@RequestBody PersonRecoveryPasswordDTO personRecoveryPasswordDTO){
+        return personService.recoveryPassword(personRecoveryPasswordDTO);
     }
     
 
