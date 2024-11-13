@@ -49,6 +49,11 @@ public class Person implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    private String validationCode;
+    private LocalDateTime validationCodeValidity;
+    private String emailValidationCode;
+    private boolean active;
+
     @Transient
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -56,8 +61,6 @@ public class Person implements UserDetails {
         this.password = passwordEncoder.encode(password);
     }
 
-    private String validationCode;
-    private LocalDateTime validationCodeValidity;
 
     @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
     @Setter(value = AccessLevel.NONE)

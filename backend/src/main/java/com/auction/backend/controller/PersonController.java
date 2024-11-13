@@ -20,6 +20,10 @@ import com.auction.backend.security.JwtService;
 import com.auction.backend.services.PersonService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -34,6 +38,12 @@ public class PersonController {
 
     @Autowired
     private JwtService jwtService;
+
+    @GetMapping("/email-validation/{email}/{code}")
+    public boolean emailValidation(@PathVariable String email, @PathVariable String code) {
+        return personService.emailValidation(email, code);
+    }
+    
 
     @PostMapping("/login")
     public PersonAuthResponseDTO authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){

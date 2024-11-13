@@ -2,8 +2,10 @@
 
 <body>
     <h2>Welcome to the Catle Auction</h2>
-    <p>Hi,<span th:text="${name}"></span> </p>
+    <p>Hi, <span th:text="${name}"></span></p>
     <p>Thank you for registering with us. We are excited to have you on board.</p>
+    <p>Here is your link to activate your account:</p>
+    <a th:href="@{${link}}">Activate Account</a>
 </body>
 
 </html>

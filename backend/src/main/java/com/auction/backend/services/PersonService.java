@@ -36,10 +36,24 @@ public class PersonService implements UserDetailsService {
         return personRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
+    private String generateRandomCode() {
+        String code;
+        do {
+            StringBuilder codeBuilder = new StringBuilder(CODE_LENGTH);
+            for (int i = 0; i < CODE_LENGTH; i++) {
+                codeBuilder.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
+            }
+            code = codeBuilder.toString();
+        } while (personRepository.existsByValidationCode(code));
+        return code;
+    }
+
     public Person create(Person Person){
+        Person.setEmailValidationCode(generateRandomCode());
         Person personCreated = personRepository.save(Person);
         Context context = new Context();
         context.setVariable("name", personCreated.getName());
+        context.setVariable("link", "http://localhost:3000/email-validation/" + personCreated.getEmail() + "/" + personCreated.getEmailValidationCode());
         try {
             emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro realizado com sucesso", context, "emailWelcome");
         } catch (MessagingException e) {
@@ -54,18 +68,6 @@ public class PersonService implements UserDetailsService {
         savedPerson.setName(Person.getName());
         savedPerson.setEmail(Person.getEmail());
         return personRepository.save(savedPerson);
-    }
-
-    private String generateRandomCode() {
-        String code;
-        do {
-            StringBuilder codeBuilder = new StringBuilder(CODE_LENGTH);
-            for (int i = 0; i < CODE_LENGTH; i++) {
-                codeBuilder.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
-            }
-            code = codeBuilder.toString();
-        } while (personRepository.existsByValidationCode(code));
-        return code;
     }
 
     public String sendValidationCode(String email) {
@@ -85,6 +87,19 @@ public class PersonService implements UserDetailsService {
         return validationCode;
 
     }
+
+    public boolean emailValidation(String email, String emailValidationCode) {
+        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        if (emailValidationCode.equals(person.getEmailValidationCode())) {
+            person.setActive(true);
+            person.setEmailValidationCode(null);
+            personRepository.save(person);
+            return true;
+        } else {
+            throw new IllegalArgumentException("Invalid email validation code");
+        }
+    }
+
     
     public boolean recoveryPassword (PersonRecoveryPasswordDTO personRecoveryPasswordDTO) {
         Person person = personRepository.findByEmail(personRecoveryPasswordDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Person not found"));

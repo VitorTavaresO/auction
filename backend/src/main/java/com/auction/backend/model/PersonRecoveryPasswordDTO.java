@@ -1,5 +1,9 @@
 package com.auction.backend.model;
 
+
+import lombok.Data;
+
+@Data
 public class PersonRecoveryPasswordDTO {
     private String email;
     private String validationCode;
@@ -9,17 +13,5 @@ public class PersonRecoveryPasswordDTO {
         this.email = email;
         this.validationCode = validationCode;
         this.newPassword = newPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getValidationCode() {
-        return validationCode;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
     }
 }
