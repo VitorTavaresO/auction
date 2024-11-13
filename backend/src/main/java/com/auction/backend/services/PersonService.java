@@ -80,6 +80,7 @@ public class PersonService implements UserDetailsService {
         personRepository.save(person);
         context.setVariable("name", person.getName());
         context.setVariable("validationCode",validationCode);
+        context.setVariable("year", LocalDateTime.now().getYear());
         try {
             emailService.sendTemplateEmail(person.getEmail(), "Código de validação", context, "emailValidationCode");
         } catch (MessagingException e) {
