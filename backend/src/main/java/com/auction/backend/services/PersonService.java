@@ -54,6 +54,7 @@ public class PersonService implements UserDetailsService {
         Context context = new Context();
         context.setVariable("name", personCreated.getName());
         context.setVariable("link", "http://localhost:3000/email-validation/" + personCreated.getEmail() + "/" + personCreated.getEmailValidationCode());
+        context.setVariable("year", LocalDateTime.now().getYear());
         try {
             emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro realizado com sucesso", context, "emailWelcome");
         } catch (MessagingException e) {

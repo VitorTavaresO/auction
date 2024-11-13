@@ -1,9 +1,88 @@
 <html>
 
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-card {
+            color: #ffd700;
+            background-color: #2d3748;
+            border: 1px solid #2d3748;
+            text-align: center;
+            padding: 20px;
+            margin: 0 0 20px 0;
+        }
+
+        .header-card img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .footer-card {
+            color: #ffd700;
+            background-color: #2d3748;
+            border: 1px solid #2d3748;
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0 0 0;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .content h2 {
+            color: #333333;
+        }
+
+        .content p {
+            color: #666666;
+        }
+
+        .validation-code {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .copy-instructions {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
 <body>
-    <h2>Welcome to the Catle Auction</h2>
-    <p>Hi,<span th:text="${name}"></span> </p>
-    <p>Your Validation Code is <span th:text="${validationCode}"></span></p>
+    <div class="container">
+        <div class="header-card">
+            <h1>Catle Auction</h1>
+        </div>
+
+        <div class="content">
+            <h2>Welcome to the Catle Auction</h2>
+            <p>Hi, <span th:text="${name}"></span></p>
+            <p>Your Validation Code is:</p>
+            <p class="validation-code" id="validationCode" th:text="${validationCode}"></p>
+            <p>Please use this code to complete your registration.</p>
+        </div>
+
+        <div class="footer-card">
+            <p>Catle Auction &copy; <span th:text="${year}"></span></p>
+        </div>
+    </div>
 </body>
 
 </html>
