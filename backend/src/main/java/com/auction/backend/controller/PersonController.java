@@ -33,6 +33,9 @@ public class PersonController {
     private PersonService personService;
 
     @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
     private AuthenticationManager  authenticationManager;
 
     @Autowired
@@ -46,6 +49,11 @@ public class PersonController {
 
     @PostMapping("/login")
     public PersonAuthResponseDTO authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){
+
+        Person person = personRepository.findByEmail(authRequest.getEmail());
+        if(person.getActive() == false){
+            return new PersonAuthResponseDTO(authRequest.getEmail(), "Email not validated");
+        }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         return new PersonAuthResponseDTO(authRequest.getEmail(), jwtService.generateToken(authentication.getName()));
     }
