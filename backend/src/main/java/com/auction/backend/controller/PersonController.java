@@ -16,6 +16,7 @@ import com.auction.backend.model.Person;
 import com.auction.backend.model.PersonAuthRequestDTO;
 import com.auction.backend.model.PersonAuthResponseDTO;
 import com.auction.backend.model.PersonRecoveryPasswordDTO;
+import com.auction.backend.repository.PersonRepository;
 import com.auction.backend.security.JwtService;
 import com.auction.backend.services.PersonService;
 
@@ -51,7 +52,7 @@ public class PersonController {
     public PersonAuthResponseDTO authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){
 
         Person person = personRepository.findByEmail(authRequest.getEmail());
-        if(person.getActive() == false){
+        if(person.isActive() == false){
             return new PersonAuthResponseDTO(authRequest.getEmail(), "Email not validated");
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
