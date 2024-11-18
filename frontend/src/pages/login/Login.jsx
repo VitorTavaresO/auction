@@ -9,6 +9,7 @@ import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 import style from "./Login.module.css";
 import { useTranslation } from "react-i18next";
+import PersonService from "../../services/PersonService";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -16,18 +17,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const personService = new PersonService();
 
-  const handleLogin = () => {
-    const storedUserData = JSON.parse(localStorage.getItem("userData"));
-    if (
-      storedUserData &&
-      storedUserData.email === email &&
-      storedUserData.password === password
-    ) {
-      localStorage.setItem("token", "token");
-      navigate("/");
-    } else {
-      setErrorMessage(t("login.invalid"));
+  const handleLogin = async () => {
+    const response = await personService.login({ email, password });
+    try {
+      if (response) {
+        localStorage.setItem("user", JSON.stringify(response));
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error.response.message);
     }
   };
 
