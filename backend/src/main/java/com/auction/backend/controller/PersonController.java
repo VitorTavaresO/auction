@@ -1,6 +1,7 @@
 package com.auction.backend.controller;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,10 +51,9 @@ public class PersonController {
 
     @PostMapping("/login")
     public PersonAuthResponseDTO authenticateUser(@Valid @RequestBody PersonAuthRequestDTO authRequest){
-
-        Person person = personRepository.findByEmail(authRequest.getEmail());
-        if(person.isActive() == false){
-            return new PersonAuthResponseDTO(authRequest.getEmail(), "Email not validated");
+        Person person = personRepository.findByEmail(authRequest.getEmail()).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        if(!person.isActive()){
+            throw new NoSuchElementException("Person not active");
         }
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
         return new PersonAuthResponseDTO(authRequest.getEmail(), jwtService.generateToken(authentication.getName()));
