@@ -27,7 +27,7 @@ const Header = () => {
       <div
         className="flex align-items-center"
         onClick={() => {
-          localStorage.removeItem("token");
+          localStorage.removeItem("user");
           window.location = "/login";
         }}
         style={{ cursor: "pointer", color: "#ffd700", marginLeft: "10px" }}

@@ -25,7 +25,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpf, setCPF] = useState("");
-  const [cpfIsValid, setCpfIsValid] = useState("");
+  const [cpfIsValid, setCpfIsValid] = useState(true);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
