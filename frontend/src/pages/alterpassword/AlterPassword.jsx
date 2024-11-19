@@ -2,6 +2,7 @@ import style from "./AlterPassword.module.css";
 import React, { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Password } from "primereact/password";
+import { InputText } from "primereact/inputtext";
 import { Divider } from "primereact/divider";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
@@ -9,15 +10,18 @@ import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 import { useTranslation } from "react-i18next";
+import PersonService from "../../services/PersonService";
 
 const AlterPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const personService = new PersonService();
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
+  const [validationCode, setValidationCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordCriteria, setPasswordCriteria] = useState({
@@ -127,6 +131,24 @@ const AlterPassword = () => {
     }
   };
 
+  const handleSubmit = async () => {
+    const email = localStorage.getItem("emailRecovery");
+    const newPassword = password;
+    try {
+      const response = await personService.recoveryPassword({
+        email,
+        validationCode,
+        newPassword,
+      });
+      if (response) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error.response.message);
+    }
+  };
+
   return (
     <div className="h-screen flex align-items-center justify-content-center bg-gray-800">
       <Card
@@ -139,6 +161,19 @@ const AlterPassword = () => {
           className="logo mb-3"
         />
         <h2>{t("alterPassword.alter")}</h2>
+        <FloatLabel className="w-full mb-5">
+          <InputText
+            value={validationCode}
+            onChange={(e) => setValidationCode(e.target.value)}
+            onFocus={() => handleFieldFocus("validationCode")}
+            onBlur={() => handleFieldBlur("validationCode", validationCode)}
+            required
+            className={`w-full ${fieldErrors.email ? "p-invalid" : ""}`}
+          />
+          <label htmlFor="validationCode">
+            {t("alterPassword.validationCode")}
+          </label>
+        </FloatLabel>
         <FloatLabel className="w-full mb-5">
           <Password
             inputStyle={{ width: "100%" }}
@@ -194,6 +229,7 @@ const AlterPassword = () => {
               : "bg-gray-500 border-gray-500"
           }`}
           disabled={!isFormValid}
+          onClick={handleSubmit}
         />
       </Card>
     </div>

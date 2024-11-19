@@ -11,10 +11,12 @@ import { Button } from "primereact/button";
 import CpfValidation from "../../validation/cpfValidation";
 import style from "./Register.module.css";
 import { useTranslation } from "react-i18next";
+import PersonService from "../../services/PersonService";
 
 const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const personService = new PersonService();
 
   const handleGoBack = () => {
     navigate(-1);
@@ -147,17 +149,26 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = () => {
-    const userData = {
-      firstName,
-      lastName,
-      cpf,
-      email,
-      phone,
-      password,
-    };
-    localStorage.setItem("userData", JSON.stringify(userData));
-    navigate("/profile");
+  const handleSubmit = async () => {
+    const name = `${firstName} ${lastName}`;
+    try {
+      const response = await personService.register({
+        name,
+        cpf,
+        email,
+        phone,
+        password,
+      });
+
+      if (response) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(
+        error.response ? error.response.data.message : "Registration failed"
+      );
+    }
   };
 
   return (

@@ -74,6 +74,7 @@
   },
   "alterPassword": {
     "alter": "Alterar Senha",
+    "validationCode": "Código de Validação",
     "newPassword": "Nova Senha",
     "confirmPassword": "Confirmar Senha",
     "cancel": "Cancelar",

@@ -8,10 +8,12 @@ import { FloatLabel } from "primereact/floatlabel";
 import { Image } from "primereact/image";
 import "primeflex/primeflex.css";
 import { useTranslation } from "react-i18next";
+import PersonService from "../../services/PersonService";
 
 const ForgetPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const personService = new PersonService();
 
   const handleGoBack = () => {
     navigate(-1);
@@ -21,6 +23,7 @@ const ForgetPassword = () => {
 
   const [isFormValid, setIsFormValid] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const isFormFilled = email;
@@ -40,6 +43,19 @@ const ForgetPassword = () => {
         ...prevErrors,
         [field]: true,
       }));
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await personService.sendValidationCode(email);
+      if (response) {
+        localStorage.setItem("emailRecovery", email);
+        navigate("/alter-password");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(error.response.message);
     }
   };
 
@@ -80,6 +96,7 @@ const ForgetPassword = () => {
               : "bg-gray-500 border-gray-500"
           }`}
           disabled={!isFormValid}
+          onClick={handleSubmit}
         />
       </Card>
     </div>

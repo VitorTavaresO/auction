@@ -41,9 +41,15 @@ public class Person implements UserDetails {
     @NotBlank(message = "{name.required}")
     private String name;
 
+    @NotBlank(message = "{cpf.required}")
+    private String cpf;
+
     @NotBlank(message =  "{email.required}")
     @Email(message =  "{email.invalid}")
     private String email;
+
+    @NotBlank(message = "{phone.required}")
+    private String phone;
 
     @NotBlank(message =  "{password.required}")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

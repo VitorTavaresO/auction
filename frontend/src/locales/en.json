@@ -74,6 +74,7 @@
   },
   "alterPassword": {
     "alter": "Alter Password",
+    "validationCode": "Validation Code",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
     "cancel": "Cancel",
