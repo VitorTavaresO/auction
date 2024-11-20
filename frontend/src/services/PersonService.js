@@ -15,6 +15,13 @@ class PersonService extends BaseService {
     return response.data;
   }
 
+  async emailValidation(email, code) {
+    const response = await this.api.get(
+      `${this.endPoint}/email-validation/${email}/${code}`
+    );
+    return response.data;
+  }
+
   async sendValidationCode(email) {
     const response = await this.api.post(
       `${this.endPoint}/send-validation-code`,

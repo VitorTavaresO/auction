@@ -8,6 +8,7 @@ import AlterPassword from "./pages/alterpassword/AlterPassword";
 import Profile from "./pages/profile/Profile";
 import AuctionList from "./pages/auctionlist/AuctionList";
 import EditUserData from "./pages/edituserdata/EditUserData";
+import RegisterConfirmation from "./pages/registerConfirmation/RegisterConfirmation";
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
 import PrivateRouter from "./components/PrivateRouter";
@@ -32,6 +33,15 @@ function App() {
               <SimpleLayout>
                 {" "}
                 <Register />{" "}
+              </SimpleLayout>
+            }
+          />
+          <Route
+            path="/email-validation/:email/:code"
+            element={
+              <SimpleLayout>
+                {" "}
+                <RegisterConfirmation />{" "}
               </SimpleLayout>
             }
           />

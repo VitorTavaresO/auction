@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,10 +43,12 @@ public class Person implements UserDetails {
     private String name;
 
     @NotBlank(message = "{cpf.required}")
+    @Column(unique = true)
     private String cpf;
 
     @NotBlank(message =  "{email.required}")
     @Email(message =  "{email.invalid}")
+    @Column(unique = true)
     private String email;
 
     @NotBlank(message = "{phone.required}")
