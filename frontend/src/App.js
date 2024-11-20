@@ -12,12 +12,17 @@ import RegisterConfirmation from "./pages/registerConfirmation/RegisterConfirmat
 import DefaultLayout from "./components/DefaultLayout";
 import SimpleLayout from "./components/SimpleLayout";
 import PrivateRouter from "./components/PrivateRouter";
+import NotFound from "./components/notFound/NotFound";
+import Unauthorized from "./components/unauthorized/Unauthorized";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/401" element={<Unauthorized />} />
+
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/login"
             element={

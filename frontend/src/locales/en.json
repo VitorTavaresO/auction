@@ -82,6 +82,11 @@
   },
 
   "error": {
+    "401": "Error 401 - Unauthorized",
+    "404": "Error 404 - Page Not Found",
+    "401Message": "You are not authorized to access this page",
+    "404Message": "The page you are looking for does not exist",
+    "back": "Back to Home",
     "login": "Login error",
     "emailNotFound": "Email not found",
     "invalidPassword": "Invalid password"

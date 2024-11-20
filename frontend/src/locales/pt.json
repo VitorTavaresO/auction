@@ -81,6 +81,11 @@
     "submit": "Enviar"
   },
   "error": {
+    "401": "Erro 401 - Não Autorizado",
+    "404": "Erro 404 - Página não encontrada",
+    "401Message": "Você não tem permissão para acessar esta página",
+    "404Message": "A página que você está procurando não foi encontrada",
+    "back": "Voltar para a Página Inicial",
     "login": "Erro ao fazer login",
     "emailNotFound": "Email não encontrado",
     "invalidPassword": "Senha inválida"
