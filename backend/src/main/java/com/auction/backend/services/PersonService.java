@@ -3,14 +3,17 @@ package com.auction.backend.services;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 
+import com.auction.backend.exception.DuplicateFieldException;
 import com.auction.backend.model.Person;
 import com.auction.backend.model.PersonRecoveryPasswordDTO;
 import com.auction.backend.repository.PersonRepository;
@@ -50,7 +53,19 @@ public class PersonService implements UserDetailsService {
 
     public Person create(Person Person){
         Person.setEmailValidationCode(generateRandomCode());
-        Person personCreated = personRepository.save(Person);
+        Person personCreated;
+        try{
+        personCreated = personRepository.save(Person);
+        } catch (DataIntegrityViolationException ex) {
+            String message = ex.getMessage();
+            if (Pattern.compile("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}").matcher(message).find()) {
+                throw new DuplicateFieldException("CPF already registered.");
+            } else if (Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}").matcher(message).find()) {
+                throw new DuplicateFieldException("Email already registered.");
+            } else {
+                throw new DuplicateFieldException("Error creating person.");
+            }
+        }
         Context context = new Context();
         context.setVariable("name", personCreated.getName());
         context.setVariable("link", "http://localhost:3000/email-validation/" + personCreated.getEmail() + "/" + personCreated.getEmailValidationCode());
@@ -58,21 +73,20 @@ public class PersonService implements UserDetailsService {
         try {
             emailService.sendTemplateEmail(personCreated.getEmail(), "Cadastro realizado com sucesso", context, "emailWelcome");
         } catch (MessagingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return personCreated;
     }
 
     public Person update(Person Person){
-        Person savedPerson = personRepository.findById(Person.getId()).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        Person savedPerson = personRepository.findById(Person.getId()).orElseThrow(() -> new NoSuchElementException("Email not found"));
         savedPerson.setName(Person.getName());
         savedPerson.setEmail(Person.getEmail());
         return personRepository.save(savedPerson);
     }
 
     public String sendValidationCode(String email) {
-        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Email not found"));
         Context context = new Context();
         String validationCode = generateRandomCode();
         person.setValidationCode(validationCode);
@@ -91,7 +105,7 @@ public class PersonService implements UserDetailsService {
     }
 
     public boolean emailValidation(String email, String emailValidationCode) {
-        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        Person person = personRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Email not found"));
         if (emailValidationCode.equals(person.getEmailValidationCode())) {
             person.setActive(true);
             person.setEmailValidationCode(null);
@@ -104,7 +118,7 @@ public class PersonService implements UserDetailsService {
 
     
     public boolean recoveryPassword (PersonRecoveryPasswordDTO personRecoveryPasswordDTO) {
-        Person person = personRepository.findByEmail(personRecoveryPasswordDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Person not found"));
+        Person person = personRepository.findByEmail(personRecoveryPasswordDTO.getEmail()).orElseThrow(() -> new NoSuchElementException("Email not found"));
 
         if (personRecoveryPasswordDTO.getValidationCode().equals(person.getValidationCode()) && person.getValidationCodeValidity().isAfter(LocalDateTime.now())) {
             person.setPassword(personRecoveryPasswordDTO.getNewPassword());

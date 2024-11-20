@@ -145,7 +145,11 @@ const AlterPassword = () => {
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage(error.response.message);
+      setErrorMessage(
+        error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Invalid code"
+      );
     }
   };
 

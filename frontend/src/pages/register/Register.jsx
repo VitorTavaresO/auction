@@ -166,7 +166,9 @@ const Register = () => {
     } catch (error) {
       console.log(error);
       setErrorMessage(
-        error.response ? error.response.data.message : "Registration failed"
+        error.response && error.response.data
+          ? error.response.data
+          : "Register error"
       );
     }
   };

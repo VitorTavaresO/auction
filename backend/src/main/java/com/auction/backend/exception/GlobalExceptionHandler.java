@@ -37,6 +37,11 @@ public class GlobalExceptionHandler {
        
     }
 
+    @ExceptionHandler(DuplicateFieldException.class)
+    public ResponseEntity<String> handleDuplicateFieldException(DuplicateFieldException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
         Map<String, String> errorDetails = new HashMap<>();

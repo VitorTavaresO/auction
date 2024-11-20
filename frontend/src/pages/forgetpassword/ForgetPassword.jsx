@@ -55,7 +55,11 @@ const ForgetPassword = () => {
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage(error.response.message);
+      setErrorMessage(
+        error.response && error.response.data && error.response.data.message
+          ? error.response.data.message
+          : "Error on send email"
+      );
     }
   };
 
@@ -83,6 +87,7 @@ const ForgetPassword = () => {
           />
           <label htmlFor="email">{t("forgetPassword.email")}</label>
         </FloatLabel>
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         <Button
           label={t("forgetPassword.cancel")}
           className="mb-3 w-full bg-red-500 border-red-500"
