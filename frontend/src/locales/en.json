@@ -79,5 +79,11 @@
     "confirmPassword": "Confirm Password",
     "cancel": "Cancel",
     "submit": "Submit"
+  },
+
+  "error": {
+    "login": "Login error",
+    "emailNotFound": "Email not found",
+    "invalidPassword": "Invalid password"
   }
 }

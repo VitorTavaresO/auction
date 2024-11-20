@@ -79,5 +79,10 @@
     "confirmPassword": "Confirmar Senha",
     "cancel": "Cancelar",
     "submit": "Enviar"
+  },
+  "error": {
+    "login": "Erro ao fazer login",
+    "emailNotFound": "Email não encontrado",
+    "invalidPassword": "Senha inválida"
   }
 }

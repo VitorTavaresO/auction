@@ -20,15 +20,26 @@ const Login = () => {
   const personService = new PersonService();
 
   const handleLogin = async () => {
-    const response = await personService.login({ email, password });
     try {
+      const response = await personService.login({ email, password });
       if (response) {
         localStorage.setItem("user", JSON.stringify(response));
         navigate("/");
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage(error.response.message);
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage === "Person not found") {
+          setErrorMessage(t("error.emailNotFound"));
+        } else if (errorMessage === "Bad credentials") {
+          setErrorMessage(t("error.invalidPassword"));
+        } else {
+          setErrorMessage(t("error.login"));
+        }
+      } else {
+        setErrorMessage(t("error.login"));
+      }
     }
   };
 
