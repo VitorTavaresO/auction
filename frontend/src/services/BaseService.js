@@ -7,6 +7,7 @@ class BaseService {
   }
 
   async create(data) {
+    console.log("Asdd");
     const response = await this.api.post(this.endPoint, data);
     return response.data;
   }

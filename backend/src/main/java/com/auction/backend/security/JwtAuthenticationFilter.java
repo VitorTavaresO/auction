@@ -26,14 +26,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private PersonService  userDetailsService;
 
     @Override
-    protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request, @SuppressWarnings({ "null" }) HttpServletResponse response, @SuppressWarnings("null") FilterChain chain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
+        System.out.println(authorizationHeader);
         String token = null;
         String username = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
+            System.out.println(token);
             username = jwtService.extractUsername(token);
         }
 

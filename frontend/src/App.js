@@ -6,6 +6,7 @@ import Register from "./pages/register/Register";
 import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
 import Profile from "./pages/profile/Profile";
+import Category from "./pages/category/Category";
 import AuctionList from "./pages/auctionlist/AuctionList";
 import EditUserData from "./pages/edituserdata/EditUserData";
 import RegisterConfirmation from "./pages/registerConfirmation/RegisterConfirmation";
@@ -86,6 +87,17 @@ function App() {
                 <DefaultLayout>
                   {" "}
                   <Profile />{" "}
+                </DefaultLayout>
+              }
+            />
+          </Route>
+          <Route element={<PrivateRouter />}>
+            <Route
+              path="/category"
+              element={
+                <DefaultLayout>
+                  {" "}
+                  <Category />{" "}
                 </DefaultLayout>
               }
             />

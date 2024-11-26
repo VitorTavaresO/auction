@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -71,7 +72,7 @@ public class Person implements UserDetails {
     }
 
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Setter(value = AccessLevel.NONE)
     private List<PersonProfile> personProfile;
 
