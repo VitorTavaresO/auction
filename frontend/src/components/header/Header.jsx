@@ -65,6 +65,7 @@ const Header = () => {
     <>
       <Menubar
         className="menubar-custom justify-content-center bg-gray-800 border-gray-800"
+        style={{ borderRadius: "0" }}
         model={centerItems}
         end={rightItems}
       />

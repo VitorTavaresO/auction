@@ -10,7 +10,10 @@ const Footer = () => {
   }, []);
 
   return (
-    <Card className="footer-card flex justify-content-center text-center bg-gray-800 border-gray-800">
+    <Card
+      className="footer-card flex justify-content-center text-center bg-gray-800 border-gray-800"
+      style={{ borderRadius: "0" }}
+    >
       <p>Vitor Tavares &copy; {year}</p>
     </Card>
   );
