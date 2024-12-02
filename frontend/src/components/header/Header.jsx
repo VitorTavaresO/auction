@@ -49,7 +49,7 @@ const Header = () => {
       label: t("header.auctions"),
       icon: "pi pi-fw pi-hammer",
       command: () => {
-        window.location = "/auction-list";
+        window.location = "/auction";
       },
     },
     {

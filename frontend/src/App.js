@@ -7,7 +7,7 @@ import ForgetPassword from "./pages/forgetpassword/ForgetPassword";
 import AlterPassword from "./pages/alterpassword/AlterPassword";
 import Profile from "./pages/profile/Profile";
 import Category from "./pages/category/Category";
-import AuctionList from "./pages/auctionlist/AuctionList";
+import Auction from "./pages/auction/Auction";
 import EditUserData from "./pages/edituserdata/EditUserData";
 import RegisterConfirmation from "./pages/registerConfirmation/RegisterConfirmation";
 import DefaultLayout from "./components/DefaultLayout";
@@ -104,11 +104,11 @@ function App() {
           </Route>
           <Route element={<PrivateRouter />}>
             <Route
-              path="/auction-list"
+              path="/auction"
               element={
                 <DefaultLayout>
                   {" "}
-                  <AuctionList />{" "}
+                  <Auction />{" "}
                 </DefaultLayout>
               }
             />

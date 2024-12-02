@@ -6,7 +6,7 @@
   },
   "password": {
     "choose": "Escolha uma senha",
-    "required": "Requerido:",
+    "required": "Requerido",
     "lowercase": "Pelo menos uma letra minúscula",
     "uppercase": "Pelo menos uma letra maiúscula",
     "number": "Pelo menos um número",
@@ -81,6 +81,7 @@
     "submit": "Enviar"
   },
   "error": {
+    "generic": "Erro",
     "401": "Erro 401 - Não Autorizado",
     "404": "Erro 404 - Página não encontrada",
     "401Message": "Você não tem permissão para acessar esta página",
@@ -89,5 +90,41 @@
     "login": "Erro ao fazer login",
     "emailNotFound": "Email não encontrado",
     "invalidPassword": "Senha inválida"
+  },
+  "auction": {
+    "new": "Novo Leilão",
+    "edit": "Editar Leilão",
+    "title": "Título",
+    "description": "Descrição",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "deleteConfirm": "Remover o leilão \"{title}\"?",
+    "deleteHeader": "Confirmação",
+    "deleteSuccess": "Leilão removido com sucesso",
+    "deleteError": "Erro ao remover leilão",
+    "createSuccess": "Leilão criado com sucesso",
+    "createError": "Erro ao criar leilão",
+    "updateSuccess": "Leilão atualizado com sucesso",
+    "updateError": "Erro ao atualizar leilão",
+    "fetchError": "Erro ao buscar leilões",
+    "emptyMessage": "Nenhum leilão encontrado."
+  },
+  "category": {
+    "new": "Nova Categoria",
+    "edit": "Editar Categoria",
+    "name": "Nome",
+    "observation": "Observação",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "deleteConfirm": "Remover a categoria \"{name}\"?",
+    "deleteHeader": "Confirmação",
+    "deleteSuccess": "Categoria removida com sucesso",
+    "deleteError": "Erro ao remover categoria",
+    "createSuccess": "Categoria criada com sucesso",
+    "createError": "Erro ao criar categoria",
+    "updateSuccess": "Categoria atualizada com sucesso",
+    "updateError": "Erro ao atualizar categoria",
+    "fetchError": "Erro ao buscar categorias",
+    "emptyMessage": "Nenhuma categoria encontrada."
   }
 }

@@ -80,8 +80,8 @@
     "cancel": "Cancel",
     "submit": "Submit"
   },
-
   "error": {
+    "generic": "Error",
     "401": "Error 401 - Unauthorized",
     "404": "Error 404 - Page Not Found",
     "401Message": "You are not authorized to access this page",
@@ -90,5 +90,41 @@
     "login": "Login error",
     "emailNotFound": "Email not found",
     "invalidPassword": "Invalid password"
+  },
+  "auction": {
+    "new": "New Auction",
+    "edit": "Edit Auction",
+    "title": "Title",
+    "description": "Description",
+    "save": "Save",
+    "cancel": "Cancel",
+    "deleteConfirm": "Remove the auction \"{title}\"?",
+    "deleteHeader": "Confirmation",
+    "deleteSuccess": "Auction removed successfully",
+    "deleteError": "Error removing auction",
+    "createSuccess": "Auction created successfully",
+    "createError": "Error creating auction",
+    "updateSuccess": "Auction updated successfully",
+    "updateError": "Error updating auction",
+    "fetchError": "Error fetching auctions",
+    "emptyMessage": "No auctions found."
+  },
+  "category": {
+    "new": "New Category",
+    "edit": "Edit Category",
+    "name": "Name",
+    "observation": "Observation",
+    "save": "Save",
+    "cancel": "Cancel",
+    "deleteConfirm": "Remove the category \"{name}\"?",
+    "deleteHeader": "Confirmation",
+    "deleteSuccess": "Category removed successfully",
+    "deleteError": "Error removing category",
+    "createSuccess": "Category created successfully",
+    "createError": "Error creating category",
+    "updateSuccess": "Category updated successfully",
+    "updateError": "Error updating category",
+    "fetchError": "Error fetching categories",
+    "emptyMessage": "No categories found."
   }
 }
