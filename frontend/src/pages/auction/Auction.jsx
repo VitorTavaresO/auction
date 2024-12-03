@@ -7,13 +7,16 @@ import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import { Toast } from "primereact/toast";
 import { InputNumber } from "primereact/inputnumber";
+import { Dropdown } from "primereact/dropdown";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import AuctionService from "../../services/AuctionService";
+import CategoryService from "../../services/CategoryService";
 import { useTranslation } from "react-i18next";
 
 const Auction = () => {
   const { t } = useTranslation();
   const [auctions, setAuctions] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [auction, setAuction] = useState({
     title: "",
     description: "",
@@ -23,6 +26,7 @@ const Auction = () => {
     observation: "",
     incrementValue: 0,
     minimumBid: 0,
+    category: null,
   });
   const [dialogVisible, setDialogVisible] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -30,9 +34,11 @@ const Auction = () => {
   const toast = useRef(null);
 
   const auctionService = new AuctionService();
+  const categoryService = new CategoryService();
 
   useEffect(() => {
     loadAuctions();
+    loadCategories();
   }, []);
 
   const loadAuctions = async () => {
@@ -51,6 +57,19 @@ const Auction = () => {
     }
   };
 
+  const loadCategories = async () => {
+    try {
+      const data = await categoryService.list();
+      setCategories(data);
+    } catch (error) {
+      toast.current.show({
+        severity: "error",
+        summary: t("error.generic"),
+        detail: t("category.fetchError"),
+      });
+    }
+  };
+
   const openNew = () => {
     setAuction({
       title: "",
@@ -61,6 +80,7 @@ const Auction = () => {
       observation: "",
       incrementValue: 0,
       minimumBid: 0,
+      category: null,
     });
     setDialogVisible(true);
     setIsEdit(false);
@@ -149,6 +169,26 @@ const Auction = () => {
     );
   };
 
+  const categoryBodyTemplate = (rowData) => {
+    return rowData.category ? rowData.category.name : "";
+  };
+
+  const dateTimeBodyTemplate = (rowData, field) => {
+    const date = new Date(rowData[field]);
+    const formattedDate = date.toLocaleDateString("pt-BR");
+    const formattedTime = date.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    return (
+      <div>
+        <div>{formattedDate}</div>
+        <div>{formattedTime}</div>
+      </div>
+    );
+  };
+
   const dialogFooter = (
     <div>
       <Button
@@ -201,19 +241,21 @@ const Auction = () => {
           sortable
         ></Column>
         <Column
+          field="category"
+          header={t("auction.category")}
+          body={categoryBodyTemplate}
+          sortable
+        ></Column>
+        <Column
           field="startDateTime"
           header={t("auction.startDateTime")}
+          body={(rowData) => dateTimeBodyTemplate(rowData, "startDateTime")}
           sortable
         ></Column>
         <Column
           field="endDateTime"
           header={t("auction.endDateTime")}
-          sortable
-        ></Column>
-        <Column field="status" header={t("auction.status")} sortable></Column>
-        <Column
-          field="incrementValue"
-          header={t("auction.incrementValue")}
+          body={(rowData) => dateTimeBodyTemplate(rowData, "endDateTime")}
           sortable
         ></Column>
         <Column
@@ -263,7 +305,8 @@ const Auction = () => {
             value={auction.startDateTime}
             onChange={(e) => setAuction({ ...auction, startDateTime: e.value })}
             showTime
-            showSeconds
+            dateFormat="dd/mm/yy"
+            hourFormat="24"
             required
             className="w-full"
           />
@@ -275,7 +318,8 @@ const Auction = () => {
             value={auction.endDateTime}
             onChange={(e) => setAuction({ ...auction, endDateTime: e.value })}
             showTime
-            showSeconds
+            dateFormat="dd/mm/yy"
+            hourFormat="24"
             required
             className="w-full"
           />
@@ -328,6 +372,18 @@ const Auction = () => {
             currency="BRL"
             locale="pt-BR"
             required
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="category">{t("auction.category")}</label>
+          <Dropdown
+            id="category"
+            value={auction.category}
+            options={categories}
+            onChange={(e) => setAuction({ ...auction, category: e.value })}
+            optionLabel="name"
+            placeholder={t("auction.category")}
             className="w-full"
           />
         </div>
