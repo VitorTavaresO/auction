@@ -4,7 +4,9 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
+import { Calendar } from "primereact/calendar";
 import { Toast } from "primereact/toast";
+import { InputNumber } from "primereact/inputnumber";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import AuctionService from "../../services/AuctionService";
 import { useTranslation } from "react-i18next";
@@ -12,7 +14,16 @@ import { useTranslation } from "react-i18next";
 const Auction = () => {
   const { t } = useTranslation();
   const [auctions, setAuctions] = useState([]);
-  const [auction, setAuction] = useState({ title: "", description: "" });
+  const [auction, setAuction] = useState({
+    title: "",
+    description: "",
+    startDateTime: null,
+    endDateTime: null,
+    status: "",
+    observation: "",
+    incrementValue: 0,
+    minimumBid: 0,
+  });
   const [dialogVisible, setDialogVisible] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -41,7 +52,16 @@ const Auction = () => {
   };
 
   const openNew = () => {
-    setAuction({ title: "", description: "" });
+    setAuction({
+      title: "",
+      description: "",
+      startDateTime: null,
+      endDateTime: null,
+      status: "",
+      observation: "",
+      incrementValue: 0,
+      minimumBid: 0,
+    });
     setDialogVisible(true);
     setIsEdit(false);
   };
@@ -114,7 +134,7 @@ const Auction = () => {
 
   const actionBodyTemplate = (rowData) => {
     return (
-      <>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mr-2"
@@ -125,7 +145,7 @@ const Auction = () => {
           className="p-button-rounded p-button-danger"
           onClick={() => confirmDeleteAuction(rowData)}
         />
-      </>
+      </div>
     );
   };
 
@@ -181,6 +201,27 @@ const Auction = () => {
           sortable
         ></Column>
         <Column
+          field="startDateTime"
+          header={t("auction.startDateTime")}
+          sortable
+        ></Column>
+        <Column
+          field="endDateTime"
+          header={t("auction.endDateTime")}
+          sortable
+        ></Column>
+        <Column field="status" header={t("auction.status")} sortable></Column>
+        <Column
+          field="incrementValue"
+          header={t("auction.incrementValue")}
+          sortable
+        ></Column>
+        <Column
+          field="minimumBid"
+          header={t("auction.minimumBid")}
+          sortable
+        ></Column>
+        <Column
           body={actionBodyTemplate}
           header={t("auction.actions")}
         ></Column>
@@ -212,6 +253,81 @@ const Auction = () => {
             onChange={(e) =>
               setAuction({ ...auction, description: e.target.value })
             }
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="startDateTime">{t("auction.startDateTime")}</label>
+          <Calendar
+            id="startDateTime"
+            value={auction.startDateTime}
+            onChange={(e) => setAuction({ ...auction, startDateTime: e.value })}
+            showTime
+            showSeconds
+            required
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="endDateTime">{t("auction.endDateTime")}</label>
+          <Calendar
+            id="endDateTime"
+            value={auction.endDateTime}
+            onChange={(e) => setAuction({ ...auction, endDateTime: e.value })}
+            showTime
+            showSeconds
+            required
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="status">{t("auction.status")}</label>
+          <InputText
+            id="status"
+            value={auction.status}
+            onChange={(e) => setAuction({ ...auction, status: e.target.value })}
+            required
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="observation">{t("auction.observation")}</label>
+          <InputText
+            id="observation"
+            value={auction.observation}
+            onChange={(e) =>
+              setAuction({ ...auction, observation: e.target.value })
+            }
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="incrementValue">{t("auction.incrementValue")}</label>
+          <InputNumber
+            id="incrementValue"
+            value={auction.incrementValue}
+            onValueChange={(e) =>
+              setAuction({ ...auction, incrementValue: e.value })
+            }
+            mode="currency"
+            currency="BRL"
+            locale="pt-BR"
+            required
+            className="w-full"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="minimumBid">{t("auction.minimumBid")}</label>
+          <InputNumber
+            id="minimumBid"
+            value={auction.minimumBid}
+            onValueChange={(e) =>
+              setAuction({ ...auction, minimumBid: e.value })
+            }
+            mode="currency"
+            currency="BRL"
+            locale="pt-BR"
+            required
             className="w-full"
           />
         </div>
