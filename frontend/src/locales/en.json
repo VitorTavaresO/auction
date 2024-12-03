@@ -101,6 +101,7 @@
     "endDateTime": "End Date/Time",
     "observation": "Observation",
     "category": "Category",
+    "images": "Images",
     "status": "Status",
     "incrementValue": "Increment Value",
     "minimumBid": "Minimum Bid",

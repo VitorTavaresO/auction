@@ -101,6 +101,7 @@
     "endDateTime": "Data e Hora de Encerramento",
     "observation": "Observação",
     "category": "Categoria",
+    "images": "Imagens",
     "status": "Status",
     "incrementValue": "Valor do Incremento",
     "minimumBid": "Lance Mínimo",

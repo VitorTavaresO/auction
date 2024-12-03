@@ -8,9 +8,11 @@ import { Calendar } from "primereact/calendar";
 import { Toast } from "primereact/toast";
 import { InputNumber } from "primereact/inputnumber";
 import { Dropdown } from "primereact/dropdown";
+import { FileUpload } from "primereact/fileupload";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import AuctionService from "../../services/AuctionService";
 import CategoryService from "../../services/CategoryService";
+import api from "../../config/axiosConfig";
 import { useTranslation } from "react-i18next";
 
 const Auction = () => {
@@ -27,10 +29,14 @@ const Auction = () => {
     incrementValue: 0,
     minimumBid: 0,
     category: null,
+    images: [],
   });
   const [dialogVisible, setDialogVisible] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [imageDialogVisible, setImageDialogVisible] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrls, setImageUrls] = useState({});
   const toast = useRef(null);
 
   const auctionService = new AuctionService();
@@ -46,6 +52,7 @@ const Auction = () => {
     try {
       const data = await auctionService.list();
       setAuctions(data);
+      loadImages(data);
     } catch (error) {
       toast.current.show({
         severity: "error",
@@ -70,6 +77,30 @@ const Auction = () => {
     }
   };
 
+  const loadImages = async (auctions) => {
+    const urls = {};
+    for (const auction of auctions) {
+      for (const image of auction.images) {
+        const url = await fetchImage(image.path);
+        urls[image.path] = url;
+      }
+    }
+    setImageUrls(urls);
+  };
+
+  const fetchImage = async (path) => {
+    try {
+      const response = await api.get(`/uploads/${path}`, {
+        responseType: "blob",
+      });
+      const url = URL.createObjectURL(response.data);
+      return url;
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return null;
+    }
+  };
+
   const openNew = () => {
     setAuction({
       title: "",
@@ -81,6 +112,7 @@ const Auction = () => {
       incrementValue: 0,
       minimumBid: 0,
       category: null,
+      images: [],
     });
     setDialogVisible(true);
     setIsEdit(false);
@@ -92,20 +124,24 @@ const Auction = () => {
 
   const saveAuction = async () => {
     try {
+      let createdAuction;
       if (isEdit) {
-        await auctionService.update(auction);
+        createdAuction = await auctionService.update(auction);
         toast.current.show({
           severity: "success",
           summary: t("success"),
           detail: t("auction.updateSuccess"),
         });
       } else {
-        await auctionService.create(auction);
+        createdAuction = await auctionService.create(auction);
         toast.current.show({
           severity: "success",
           summary: t("success"),
           detail: t("auction.createSuccess"),
         });
+      }
+      if (auction.images.length > 0) {
+        await uploadImages(createdAuction.id);
       }
       loadAuctions();
     } catch (error) {
@@ -117,6 +153,20 @@ const Auction = () => {
     } finally {
       hideDialog();
     }
+  };
+
+  const uploadImages = async (auctionId) => {
+    const formData = new FormData();
+    auction.images.forEach((image) => {
+      formData.append("images", image);
+    });
+    formData.append("auctionId", auctionId);
+    await auctionService.uploadImages(formData);
+  };
+
+  const onUpload = (e) => {
+    const uploadedFiles = e.files;
+    setAuction({ ...auction, images: [...auction.images, ...uploadedFiles] });
   };
 
   const editAuction = (auction) => {
@@ -187,6 +237,37 @@ const Auction = () => {
         <div>{formattedTime}</div>
       </div>
     );
+  };
+
+  const imageBodyTemplate = (rowData) => {
+    return (
+      <div>
+        {rowData.images.map((image, index) => (
+          <img
+            key={index}
+            src={imageUrls[image.path] || ""}
+            alt={`Auction Image ${index}`}
+            style={{
+              width: "100px",
+              height: "100px",
+              marginRight: "10px",
+              cursor: "pointer",
+            }}
+            onClick={() => openImageDialog(imageUrls[image.path] || "")}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const openImageDialog = (imagePath) => {
+    setSelectedImage(imagePath);
+    setImageDialogVisible(true);
+  };
+
+  const hideImageDialog = () => {
+    setImageDialogVisible(false);
+    setSelectedImage(null);
   };
 
   const dialogFooter = (
@@ -262,6 +343,11 @@ const Auction = () => {
           field="minimumBid"
           header={t("auction.minimumBid")}
           sortable
+        ></Column>
+        <Column
+          field="images"
+          header={t("auction.images")}
+          body={imageBodyTemplate}
         ></Column>
         <Column
           body={actionBodyTemplate}
@@ -387,6 +473,34 @@ const Auction = () => {
             className="w-full"
           />
         </div>
+        <div className="field">
+          <label htmlFor="images">{t("auction.images")}</label>
+          <FileUpload
+            name="images"
+            multiple
+            accept="image/*"
+            maxFileSize={1000000}
+            customUpload
+            uploadHandler={onUpload}
+            auto
+          />
+        </div>
+      </Dialog>
+
+      <Dialog
+        visible={imageDialogVisible}
+        style={{ width: "50vw" }}
+        header={t("auction.image")}
+        modal
+        onHide={hideImageDialog}
+      >
+        {selectedImage && (
+          <img
+            src={selectedImage}
+            alt="Selected Auction Image"
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
       </Dialog>
     </div>
   );
