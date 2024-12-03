@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.auction.backend.model.Category;
+import com.auction.backend.model.Person;
 import com.auction.backend.repository.CategoryRepository;
 
 @Service
@@ -15,11 +16,12 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Category create(Category category) {    
+    public Category create(Category category, Person person) {
+        category.setPerson(person);
         return categoryRepository.save(category);
     }
 
-    public Category update(Category category) {      
+    public Category update(Category category) {
         Category categorySaved = categoryRepository.findById(category.getId())
                 .orElseThrow(() -> new NoSuchElementException("Objeto não encontrado"));
         categorySaved.setName(category.getName());
