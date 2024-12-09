@@ -25,6 +25,7 @@ public class CategoryService {
         Category categorySaved = categoryRepository.findById(category.getId())
                 .orElseThrow(() -> new NoSuchElementException("Objeto não encontrado"));
         categorySaved.setName(category.getName());
+        categorySaved.setObservation(category.getObservation());
         return categoryRepository.save(categorySaved);
     }
 
