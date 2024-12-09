@@ -242,20 +242,22 @@ const Auction = () => {
   const imageBodyTemplate = (rowData) => {
     return (
       <div>
-        {rowData.images.map((image, index) => (
-          <img
-            key={index}
-            src={imageUrls[image.path] || ""}
-            alt={`Auction Image ${index}`}
-            style={{
-              width: "100px",
-              height: "100px",
-              marginRight: "10px",
-              cursor: "pointer",
-            }}
-            onClick={() => openImageDialog(imageUrls[image.path] || "")}
-          />
-        ))}
+        {rowData.images.map(
+          (image, index) =>
+            imageUrls[image.path] && (
+              <img
+                key={index}
+                src={imageUrls[image.path]}
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  marginRight: "10px",
+                  cursor: "pointer",
+                }}
+                onClick={() => openImageDialog(imageUrls[image.path])}
+              />
+            )
+        )}
       </div>
     );
   };
@@ -490,7 +492,7 @@ const Auction = () => {
       <Dialog
         visible={imageDialogVisible}
         style={{ width: "50vw" }}
-        header={t("auction.image")}
+        header={t("auction.images")}
         modal
         onHide={hideImageDialog}
       >
